@@ -1,0 +1,20 @@
+# Ignore node_modules directory
+node_modules/
+
+# Ignore logs and other temporary files
+*.log
+*.tmp
+
+# Ignore compiled binaries
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Ignore dependency directories
+vendor/
+bower_components/
+jspm_packages/
+
+# Ignore macOS system files
+.DS_Store
