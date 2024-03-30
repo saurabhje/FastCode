@@ -11,12 +11,12 @@ export default function TypingGame() {
   }
 
   return (
-    <main className="px-4 lg:px-20 flex flex-col items-center">
+    <main className="py-4 px-4 lg:px-20 flex flex-col items-center">
       <button 
         onClick={handleMode}
-        className="bg-zinc-800 text-white rounded-md p-1"
+        className="bg-zinc-800 text-white rounded-md py-1 w-20"
         >
-          TextCode
+          {mode ==='text' ? 'code' : 'text'}
       </button>
       {mode == 'text'? <RandPhrase /> : <RandCode /> }
     </main>

@@ -7,7 +7,7 @@ export default function NavBar(){
             <div className="flex items-center gap-10">
                 <a href="#" className="p-1 text-lg no-underline  hover:text-gray-600 hover:underline hover:decoration-2">One</a>
                 <a href="#" className="text-lg no-underline  hover:text-gray-500">Two</a>
-                <a href="#" className="text-lg no-underline  hover:text-gray-600">Login</a>
+                <a href="/login" className="text-lg no-underline  hover:text-gray-600">Login</a>
             </div>
         </nav>
     )
