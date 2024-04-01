@@ -9,6 +9,9 @@ Client/node_modules
 .pnp.js
 .yarn/install-state.gz
 
+Client/.next
+/Client/.next
+Client/.next/
 # testing
 .next/
 /.next/

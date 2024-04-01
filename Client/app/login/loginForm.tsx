@@ -1,8 +1,32 @@
+'use client'
 import { Button } from "@/components/ui/button"
-
 export default function Login(){
+    const onSubmit = async (e: any) => {
+        e.preventDefault();
+        const data = {
+            email : e.target[0].value,
+            password : e.target[1].value
+        }
+        try{
+            const response = await fetch('http://127.0.0.1:5000/login', {
+                method : 'POST',
+                headers: {
+                    'Content-Type' : 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+            const result = await response.json();
+            if (response.ok){
+                console.log(result.message)
+            }else{
+                throw new Error('failed to login', result.error);
+            }
+        } catch(error){
+            console.log(error)
+        }
+    }
     return(
-        <form className="space-y-12 w-full sm:w-[400px]">
+        <form onSubmit={onSubmit} className="space-y-12 w-full sm:w-[400px]">
             <div className="grid w-full items-center gap-1.5">
                 <label htmlFor="email">Email</label>
                 <input 
@@ -22,7 +46,7 @@ export default function Login(){
                  />
             </div>
             <div className="w-full">
-                <Button className="w-full" size="lg">
+                <Button type="submit" className="w-full" size="lg">
                     Login
                 </Button>
             </div>
