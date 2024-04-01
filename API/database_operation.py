@@ -1,4 +1,4 @@
-def create_user(cur, connector, name, email, password):
+def create_user(cur, connector, name, password, email):
     try:
         cur.execute(
             '''INSERT INTO users(
