@@ -1,25 +1,27 @@
 'use client'
-import React, {useState } from "react";
+import React, { useState } from "react";
 import './page.css';
 import RandPhrase from "@/components/randPhrase";
 import RandCode from "@/components/randCode";
+import NavBar from "@/components/navbar";
+import { Switch } from "@/components/ui/switch"
 export default function TypingGame() {
-  const [mode, setMode] = useState<string>('code');
-  
-  function handleMode(){
-    mode == 'code' ? setMode('text') : setMode('code') 
+  const [mode, setMode] = useState<string>('text');
+
+  function handleMode() {
+    mode == 'code' ? setMode('text') : setMode('code')
   }
 
   return (
-    <main className="py-4 px-4 lg:px-20 flex flex-col items-center">
-      <button 
-        onClick={handleMode}
-        className="bg-zinc-800 text-white rounded-md py-1 w-20"
-        >
-          {mode ==='text' ? 'code' : 'text'}
-      </button>
-      {mode == 'text'? <RandPhrase /> : <RandCode /> }
-    </main>
-
+    <>
+      <NavBar />
+      <main className="py-4 px-4 lg:px-20 flex flex-col items-center">
+        <div className="self-end flex items-center gap-1.5">
+          <label htmlFor="moder" className="text-base">Code(Beta)</label>
+          <Switch id="moder" onClick={handleMode}/>
+        </div>
+        {mode == 'text' ? <RandPhrase /> : <RandCode />}
+      </main>
+    </>
   );
 }
