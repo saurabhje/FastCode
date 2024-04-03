@@ -1,13 +1,19 @@
 'use client'
 import { Button } from "@/components/ui/button"
+import { useToast } from "@/components/ui/use-toast"
+import { storeToken } from "@/components/features/storeToken";
+import { useRouter } from 'next/navigation'
+
 export default function Login(){
+    const { toast } = useToast()
+    const router = useRouter()
+
     const onSubmit = async (e: any) => {
         e.preventDefault();
         const data = {
             email : e.target[0].value,
             password : e.target[1].value
         }
-        try{
             const response = await fetch('http://127.0.0.1:5000/login', {
                 method : 'POST',
                 headers: {
@@ -16,16 +22,28 @@ export default function Login(){
                 body: JSON.stringify(data),
             });
             const result = await response.json();
-            if (response.ok){
-                console.log(result.message)
+            if (response.ok) {
+                if (result.token){
+                    toast({
+                        title: "Login successful",
+                        description: "Welcome back! I missed you",
+                        duration: 1500
+                    });
+                    await storeToken(result)
+                }else{
+                    console.log('No token generated gent! Dev is novice, give him time')
+                }
+            router.replace("/")
             }else{
-                throw new Error('failed to login', result.error);
+                toast({
+                    title : "Uh oh! Something went wrong.",
+                    description: `${result.error}`
+                });
             }
-        } catch(error){
-            console.log(error)
-        }
     }
+
     return(
+        <>
         <form onSubmit={onSubmit} className="space-y-12 w-full sm:w-[400px]">
             <div className="grid w-full items-center gap-1.5">
                 <label htmlFor="email">Email</label>
@@ -51,5 +69,6 @@ export default function Login(){
                 </Button>
             </div>
         </form>
+        </>
     )
 }

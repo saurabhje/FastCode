@@ -5,8 +5,8 @@ export default function NavBar(){
                 <a href="/" className="text-2xl">FastCode</a>
             </div>
             <div className="flex items-center gap-10">
-                <a href="#" className="text-indigo-500 p-1 text-lg no-underline hover:underline hover:decoration-2">One</a>
-                <a href="#" className="text-indigo-500 text-lg no-underline  hover:text-gray-500">Two</a>
+                <a href="#" className="text-lg no-underline hover:text-gray-500">One</a>
+                <a href="#" className="text-lg no-underline  hover:text-gray-500">Two</a>
                 <a href="/login" className="text-lg no-underline  hover:text-gray-600">Login</a>
             </div>
         </nav>

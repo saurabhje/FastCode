@@ -30,8 +30,8 @@ export default function SignUp(){
     }
 
     return(
-        <form onSubmit={onSubmit} className="space-y-12 w-full sm:w-[400px]">
-            <div className="grid w-full gap-1.5">
+        <form onSubmit={onSubmit} className="space-y-8 w-full sm:w-[400px]">
+            <div className="grid w-full items-center gap-1.5">
                 <label htmlFor="name">Name</label>
                 <input 
                     required
@@ -41,7 +41,7 @@ export default function SignUp(){
                     className="w-full border-b-2 border-blue-gray-200 bg-transparent text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-gray-900 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50 duration-300 ease-in-out"    
                 />
             </div>
-            <div className="grid w-full gap-1.5">
+            <div className="grid w-full items-center gap-1.5">
                 <label>Email</label>
                 <input 
                     required
@@ -50,7 +50,7 @@ export default function SignUp(){
                     className="w-full border-b-2 border-blue-gray-200 bg-transparent text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-gray-900 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50 duration-300 ease-in-out"                    
                 />
             </div>
-            <div className="grid w-full gap-1.5">
+            <div className="grid w-full items-center gap-1.5">
                 <label>Password</label>
                 <input 
                     required
@@ -62,7 +62,7 @@ export default function SignUp(){
             </div>
             <div className="w-full">
                 <Button type="submit" className="w-full" size="lg">
-                    Login
+                    Sign up
                 </Button>
             </div>
         </form>
