@@ -3,16 +3,25 @@ from flask_mysqldb import MySQL
 from flask_cors import CORS
 from database_operation import create_user
 from flask_bcrypt import Bcrypt
+from flask_jwt_extended import create_access_token
+from flask_jwt_extended import get_jwt_identity
+from flask_jwt_extended import jwt_required
+from flask_jwt_extended import JWTManager
+from dotenv import load_dotenv
+import os
+load_dotenv()
 
 app = Flask(__name__)
 CORS(app)
 
-app.config['MYSQL_USER'] = 'sql6695518'
-app.config['MYSQL_PASSWORD'] = 'AirLJ7ew6x'
-app.config['MYSQL_HOST'] = 'sql6.freemysqlhosting.net' 
-app.config['MYSQL_DB'] = 'sql6695518'
+app.config['MYSQL_USER'] = os.environ.get('MYSQL_USER')
+app.config['MYSQL_PASSWORD'] = os.environ.get('MYSQL_PASSWORD')
+app.config['MYSQL_HOST'] = os.environ.get('MYSQL_HOST')
+app.config['MYSQL_DB'] = os.environ.get('MYSQL_DB')
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
+app.config["JWT_SECRET_KEY"] = os.environ.get('JWT_SECRET_KEY')
 
+jwt = JWTManager(app)
 mysql = MySQL(app)
 bcrypt = Bcrypt(app)
 
@@ -36,11 +45,12 @@ def check_cred():
         user = cur.fetchone()
         cur.close()
         if user and bcrypt.check_password_hash(user['password'], password):
-            return {'message' : 'Login sucessfull'}, 200
+            access_token = create_access_token(identity=user['id'])
+            return {'token' : access_token}
         else:
             return {'error' : 'Invalid email or password'}, 401
     except Exception as e:
-        return {'error' : str(e)}, 400
+        return {'error' : str(e)}, 500
 
 
 @app.route('/register', methods=['POST'])
@@ -57,5 +67,3 @@ def insert():
     except Exception as e:
         return {'error': str(e)}, 400
 
-if __name__ == '__main__':
-    app.run(debug=True)
