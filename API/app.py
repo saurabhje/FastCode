@@ -8,7 +8,9 @@ from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
 from flask_jwt_extended import JWTManager
 from dotenv import load_dotenv
+from datetime import timedelta
 import os
+
 load_dotenv()
 
 app = Flask(__name__)
@@ -34,6 +36,25 @@ def index():
     cur.close()        
     return {'data': results}, 200
 
+@app.route('/profile')
+@jwt_required()
+def sendStats():
+    try:
+        user_id = get_jwt_identity()
+        cur = mysql.connection.cursor()
+        cur.execute('SELECT * FROM users WHERE id = %s', (user_id,))
+        user_data = cur.fetchone()
+        cur.close()
+        if user_data:
+            user_data.pop('password', None)
+            return {'Info' : user_data}, 200
+        else:
+            return {'error' : 'user not found'}, 404
+
+    except Exception as e:
+        return {'error' : str(e)}, 500
+
+
 @app.route('/login', methods=['POST'])
 def check_cred():
     try:
@@ -41,12 +62,13 @@ def check_cred():
         cur = mysql.connection.cursor()
         email = data['email']
         password = data['password']
+        expireTime = timedelta(days=10)
         cur.execute('SELECT * FROM users WHERE email = %s', (email,))
         user = cur.fetchone()
         cur.close()
         if user and bcrypt.check_password_hash(user['password'], password):
-            access_token = create_access_token(identity=user['id'])
-            return {'token' : access_token}
+            accessToken = create_access_token(identity=user['id'], expires_delta= expireTime)
+            return {'accessToken' : accessToken}, 200
         else:
             return {'error' : 'Invalid email or password'}, 401
     except Exception as e:
