@@ -3,6 +3,16 @@ import { Button } from "@/components/ui/button"
 import { useToast } from "@/components/ui/use-toast"
 import { storeToken } from "@/components/features/storeToken";
 import { useRouter } from 'next/navigation'
+import Link from "next/link"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 
 export default function Login(){
     const { toast } = useToast()
@@ -14,7 +24,7 @@ export default function Login(){
             email : e.target[0].value,
             password : e.target[1].value
         }
-            const response = await fetch('http://127.0.0.1:5000/login', {
+            try{const response = await fetch('http://127.0.0.1:5000/login', {
                 method : 'POST',
                 headers: {
                     'Content-Type' : 'application/json',
@@ -23,52 +33,69 @@ export default function Login(){
             });
             const result = await response.json();
             if (response.ok) {
-                if (result.token){
+                if (result.accessToken){
                     toast({
                         title: "Login successful",
                         description: "Welcome back! I missed you",
                         duration: 1500
                     });
-                    await storeToken(result)
+                    await storeToken(result.accessToken)
                 }else{
                     console.log('No token generated gent! Dev is novice, give him time')
                 }
             router.replace("/")
             }else{
+                throw new Error(result.error);
+            }}catch(error){
                 toast({
                     title : "Uh oh! Something went wrong.",
-                    description: `${result.error}`
+                    description: `${error}`
                 });
             }
     }
 
-    return(
-        <>
-        <form onSubmit={onSubmit} className="space-y-12 w-full sm:w-[400px]">
-            <div className="grid w-full items-center gap-1.5">
-                <label htmlFor="email">Email</label>
-                <input 
-                    required
-                    id="email"   
-                    type="email"
-                    className="w-full border-b-2 border-blue-gray-200 bg-transparent text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-gray-900 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50 duration-300 ease-in-out"
-                 />
+    return (
+        <Card className="mx-auto max-w-sm">
+          <CardHeader>
+            <CardTitle className="text-2xl">Login</CardTitle>
+            <CardDescription>
+              Enter your email below to login to your account
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <form onSubmit={onSubmit}>
+            <div className="grid gap-4">
+              <div className="grid gap-2">
+                <Label htmlFor="email">Email</Label>
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="m@example.com"
+                  required
+                />
+              </div>
+              <div className="grid gap-2">
+                <div className="flex items-center">
+                  <Label htmlFor="password">Password</Label>
+                  {/* -----------for later implemention----- */}
+                  {/* <Link href="#" className="ml-auto inline-block text-sm underline">
+                    Forgot your password?
+                  </Link> */}
+                </div>
+                <Input id="password" type="password" required />
+              </div>
+              <Button type="submit" className="w-full">
+                Login
+              </Button>
             </div>
-            <div className="grid w-full items-center gap-1.5">
-                <label htmlFor="password">Password</label>
-                <input 
-                    required
-                    id="password"   
-                    type="password"
-                    className="w-full border-b-2 border-blue-gray-200 bg-transparent text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-gray-900 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50 duration-300 ease-in-out"
-                 />
+            <div className="mt-4 text-center text-sm">
+              Don&apos;t have an account?{" "}
+              <Link href="/register" className="underline">
+                Sign up
+              </Link>
             </div>
-            <div className="w-full">
-                <Button type="submit" className="w-full" size="lg">
-                    Login
-                </Button>
-            </div>
-        </form>
-        </>
-    )
+            </form>
+          </CardContent>
+        </Card>
+      )
 }

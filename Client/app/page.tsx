@@ -1,28 +1,13 @@
-'use client'
-import React, { useState } from "react";
+import NavBar from '@/components/navbar';
 import './page.css';
-import RandPhrase from "@/components/randPhrase";
-import RandCode from "@/components/randCode";
-import NavBar from "@/components/navbar";
-import { Switch } from "@/components/ui/switch"
-export default function TypingGame() {
-  const [mode, setMode] = useState<string>('text');
+import TypingGame from '@/components/typingGame';
 
-  function handleMode() {
-    mode == 'code' ? setMode('text') : setMode('code')
-  }
+export default async function home(){
 
-  return (
-    <>
-      <NavBar />
-      <main className="py-4 px-4 lg:px-20 flex flex-col items-center">
-        <div className="self-end flex items-center gap-1.5">
-          <label htmlFor="moder" className="text-base">Text</label>
-          <Switch id="moder" onClick={handleMode}/>
-          <label htmlFor="moder" className="text-base">Code</label>
-        </div>
-        {mode == 'text' ? <RandPhrase /> : <RandCode />}
-      </main>
-    </>
-  );
+  return(
+    <div>
+      <NavBar/>
+      <TypingGame />
+    </div>
+  )
 }

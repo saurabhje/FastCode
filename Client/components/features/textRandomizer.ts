@@ -3,7 +3,6 @@ import { wordList, preparr } from "../../public/wordFile";
 export default function getRandomPhrase(){
     const len = Math.floor(Math.random()*8 + 7);
     let phrase = ""
-    console.log(preparr.length)
     for (let i = 0; i < len ; i++){
         const isprep = Math.random() < 0.3;
         if (isprep){

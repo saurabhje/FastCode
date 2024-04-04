@@ -1,13 +1,28 @@
 'use client'
+import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { useState } from "react";
+import { useToast } from "@/components/ui/use-toast"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { useRouter } from "next/navigation"
+
 export default function SignUp(){
+    const { toast } = useToast()
+    const router = useRouter()
+    
     const onSubmit = async (e: any) => {
         e.preventDefault();
         let data = {
-            name : e.target[0].value,
-            email: e.target[1].value,
-            password : e.target[2].value
+            name: e.target[0].value + ' ' + e.target[1].value,
+            email: e.target[2].value,
+            password : e.target[3].value
         }
         try {
             const response = await fetch('http://127.0.0.1:5000/register', {
@@ -19,52 +34,77 @@ export default function SignUp(){
             });
             const result = await response.json();
             if (response.ok) {
-                console.log(result.message)
-
+                toast({
+                    title: 'Sign up successful',
+                    description : 'Login to access dashboard',
+                    duration: 2000
+                })
+                router.replace("/login")
             } else {
                 throw new Error('Failed to create user', result.error);
             }
+            
         } catch (error) {
-            console.error('Error:', error);
+            toast({
+                title : "Uh oh! Something went wrong.",
+                description: `${error}`
+            });
         }
     }
 
-    return(
-        <form onSubmit={onSubmit} className="space-y-8 w-full sm:w-[400px]">
-            <div className="grid w-full items-center gap-1.5">
-                <label htmlFor="name">Name</label>
-                <input 
-                    required
-                    id="text"
-                    type="text"
-                    minLength={4} maxLength={20}               
-                    className="w-full border-b-2 border-blue-gray-200 bg-transparent text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-gray-900 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50 duration-300 ease-in-out"    
+    return (
+        <Card className="mx-auto max-w-sm">
+          <CardHeader>
+            <CardTitle className="text-xl">Sign Up</CardTitle>
+            <CardDescription>
+              Enter your information to create an account
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+          <form onSubmit={onSubmit}>
+            <div className="grid gap-4">
+              <div className="grid grid-cols-2 gap-4">
+                <div className="grid gap-2">
+                  <Label htmlFor="first-name">First name</Label>
+                  <Input id="first-name" placeholder="Saurabh" required />
+                </div>
+                <div className="grid gap-2">
+                  <Label htmlFor="last-name">Last name</Label>
+                  <Input id="last-name" placeholder="Chandel" required />
+                </div>
+              </div>
+              <div className="grid gap-2">
+                <Label htmlFor="email">Email</Label>
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="m@example.com"
+                  required
                 />
+              </div>
+              <div className="grid gap-2">
+                <Label htmlFor="password">Password</Label>
+                <Input id="password" type="password" />
+              </div>
+              <Button type="submit" className="w-full">
+                Create an account
+              </Button>
+              {/* --------hmmmmmm Maybe in coming release---------
+              <Button variant="outline" className="w-full">
+                Sign up with GitHub
+              </Button> */}
             </div>
-            <div className="grid w-full items-center gap-1.5">
-                <label>Email</label>
-                <input 
-                    required
-                    id="email"
-                    type="email"
-                    className="w-full border-b-2 border-blue-gray-200 bg-transparent text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-gray-900 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50 duration-300 ease-in-out"                    
-                />
+            <div className="mt-4 text-center text-sm">
+              Already have an account?{" "}
+              <Link href="/login" className="underline">
+                Sign in
+              </Link>
             </div>
-            <div className="grid w-full items-center gap-1.5">
-                <label>Password</label>
-                <input 
-                    required
-                    id="password"
-                    type="password"
-                    minLength={8} maxLength={20}
-                    className="w-full border-b-2 border-blue-gray-200 bg-transparent text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-gray-900 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50 duration-300 ease-in-out"                    
-                />
-            </div>
-            <div className="w-full">
-                <Button type="submit" className="w-full" size="lg">
-                    Sign up
-                </Button>
-            </div>
-        </form>
-    )
+            </form>
+          </CardContent>
+        </Card>
+      )
 }
+
+
+
