@@ -1,41 +1,42 @@
+import React, { useEffect, useState } from 'react';
 import NavBar from "@/components/navbar";
 import { getToken } from "@/components/features/storeToken";
 import ProfileData from "./profile";
 
 const url = 'http://127.0.0.1:5000/profile';
 
-export default function ProfilePage() {
-        async function fetchData(token :any) {
+export default async function ProfilePage() {
+        const fetchData = async () => {
             try {
-                const response = await fetch(url, {
-                    method: 'GET',
-                    headers: {
-                        'Authorization': `Bearer ${token}`
+                const cookie = await getToken();
+                const token = cookie?.value;
+
+                if (token) {
+                    const response = await fetch(url, {
+                        method: 'GET',
+                        headers: {
+                            'Authorization': `Bearer ${token}`
+                        }
+                    });
+
+                    if (response.ok) {
+                        const data = await response.json();
+                        return data.Info
+                    } else {
+                        const errorData = await response.json();
+                        throw new Error(errorData.error);
                     }
-                });
-                const data = await response.json();
-                if (response.ok) {
-                    return data.info
-                } else {
-                    throw new Error(data.error);
                 }
-            } catch (error : any) {
-                return error
+            } catch (error) {
+                return {'Error fetching profile data': error};
             }
-        }
+        };
 
-        async function fetchProfile() {
-            const cookie = await getToken();
-            const token = cookie?.value;
-            if (token) {
-                await fetchData(token);
-            }
-        }
-
+    let profileData = await fetchData();
     return (
         <main>
             <NavBar />
-            <ProfileData fetchProfile={fetchProfile} />
+            <ProfileData profileData={profileData} />
         </main>
     );
 }

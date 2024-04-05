@@ -7,7 +7,7 @@ export async function storeToken(acceessToken: string ) {
         name: "acceessToken",
         value: acceessToken,
         httpOnly: true,
-        sameSite: "strict",
+        sameSite: "none",
         maxAge: MAX_AGE,
         secure: true,
     })
@@ -15,3 +15,7 @@ export async function storeToken(acceessToken: string ) {
 export async function getToken(){
     return cookies().get('acceessToken')
 }
+
+export async function removeToken() {
+    cookies().delete('acceessToken')
+  }

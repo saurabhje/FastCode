@@ -1,7 +1,7 @@
 'use client'
 import { Button } from "@/components/ui/button"
 import { useToast } from "@/components/ui/use-toast"
-import { storeToken } from "@/components/features/storeToken";
+import { removeToken, storeToken } from "@/components/features/storeToken";
 import { useRouter } from 'next/navigation'
 import Link from "next/link"
 import {
