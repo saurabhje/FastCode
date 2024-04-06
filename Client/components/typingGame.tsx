@@ -11,13 +11,13 @@ export default function TypingGame() {
     mode == 'code' ? setMode('text') : setMode('code')
   }
   return (
-      <div className="py-4 px-4 lg:px-20 flex flex-col items-center">
-        <div className="self-end flex items-center gap-1.5">
-          <label htmlFor="moder" className="text-base">Text</label>
-          <Switch id="moder" className="data-[state=unchecked]:bg-foreground" onClick={handleMode}/>
-          <label htmlFor="moder" className="text-base">Code</label>
-        </div>
-        {mode == 'text' ? <RandPhrase /> : <RandCode />}
+    <div className="py-4 px-4 lg:px-20 flex flex-col items-center">
+      <div className="self-end flex items-center gap-1.5">
+        <label htmlFor="moder" className="text-base">Text</label>
+        <Switch id="moder" className="data-[state=unchecked]:bg-foreground" onClick={handleMode} />
+        <label htmlFor="moder" className="text-base">Code</label>
       </div>
+      {mode == 'text' ? <RandPhrase /> : <RandCode />}
+    </div>
   );
 }

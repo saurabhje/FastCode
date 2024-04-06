@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+const url = process.env.NEXT_PUBLIC_URL
 
 export default function Login(){
     const { toast } = useToast()
@@ -24,7 +25,7 @@ export default function Login(){
             email : e.target[0].value,
             password : e.target[1].value
         }
-            try{const response = await fetch('http://127.0.0.1:5000/login', {
+            try{const response = await fetch(`${url}/login`, {
                 method : 'POST',
                 headers: {
                     'Content-Type' : 'application/json',

@@ -30,11 +30,18 @@ bcrypt = Bcrypt(app)
 
 @app.route('/')
 def index():
-    cur = mysql.connection.cursor()
-    cur.execute('''SELECT * FROM users''')
-    results = cur.fetchall() 
-    cur.close()        
-    return {'data': results}, 200
+    try:
+        cur = mysql.connection.cursor()
+        cur.execute('SELECT * FROM users ORDER BY RAND() LIMIT 1')
+        results = cur.fetchone() 
+        cur.close()  
+        if results:
+            return {'message': 'Initialized server and database'}, 200
+        else:
+            return {'error':'failed to initialize database'}, 503
+                   
+    except Exception as e:
+        return {'error': 'failed to communicate with server'}, 500
 
 @app.route('/profile')
 @jwt_required()

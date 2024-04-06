@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { cookies } from "next/headers";
-
+import { getToken } from "./components/features/storeToken";
 const loggedInRoutes = ["/profile"];
 const loggedOutRoutes = ["/login", "/register"];
 
@@ -16,9 +15,9 @@ export default async function AuthMiddleware(
   ) {
     return NextResponse.next();
   } else {
-    const myCookie = cookies().get('accessToken');
+    const myCookie = await getToken()
     let token = myCookie?.value
-
+    console.log(token)
     if (
       !token &&
       loggedInRoutes.some((path) => req.nextUrl.pathname.startsWith(path))

@@ -12,6 +12,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useRouter } from "next/navigation"
+const url = process.env.NEXT_PUBLIC_URL
 
 export default function SignUp(){
     const { toast } = useToast()
@@ -25,7 +26,7 @@ export default function SignUp(){
             password : e.target[3].value
         }
         try {
-            const response = await fetch('http://127.0.0.1:5000/register', {
+            const response = await fetch(`${url}/register`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

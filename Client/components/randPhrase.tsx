@@ -15,7 +15,6 @@ export default function RandPhrase() {
 
     useEffect(() => {
         setRandPhrase(getRandomPhrase())
-
         const handleKeydown = () =>{
             if (inputRef.current){
                 inputRef.current.focus();

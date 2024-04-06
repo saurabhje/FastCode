@@ -3,7 +3,7 @@ import NavBar from "@/components/navbar";
 import { getToken } from "@/components/features/storeToken";
 import ProfileData from "./profile";
 
-const url = 'http://127.0.0.1:5000/profile';
+const url = process.env.NEXT_PUBLIC_URL
 
 export default async function ProfilePage() {
         const fetchData = async () => {
@@ -12,7 +12,7 @@ export default async function ProfilePage() {
                 const token = cookie?.value;
 
                 if (token) {
-                    const response = await fetch(url, {
+                    const response = await fetch(`${url}/profile`, {
                         method: 'GET',
                         headers: {
                             'Authorization': `Bearer ${token}`

@@ -6,7 +6,6 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
-import { DollarSign } from 'lucide-react';
 
 type ProfileDataProps = {
     profileData: {
