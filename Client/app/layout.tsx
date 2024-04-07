@@ -11,8 +11,8 @@ const fontSans = FontSans({
 });
 
 export const metadata: Metadata = {
-  title: "Code Typing Practice: Improve Your Coding Skills | Programmer's Keyboard Exercises",
-  description: "Enhance your programming speed and accuracy with our typing exercises designed for programmers. Practice coding and boost your productivity.",
+  title: "KeyScripter | Your code typing practice ground",
+  description: "Improve your coding speed and accuracy with our innovative typing practice app! Designed specifically for coders, our app provides a fun and engaging way to enhance your skills by offering a variety of code snippets to type. Track your progress, earn rewards, and compete with friends or colleagues to become a coding master. Whether you're a beginner or an experienced developer, our app is perfect for anyone looking to boost their productivity and efficiency in writing code.",
 };
 
 

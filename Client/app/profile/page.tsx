@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from 'react';
 import NavBar from "@/components/navbar";
 import { getToken } from "@/components/features/storeToken";
 import ProfileData from "./profile";

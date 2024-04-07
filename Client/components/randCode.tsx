@@ -15,9 +15,7 @@ export default function CodeComponent() {
     const [wpm, setWpm] = useState<string>('');
     const [accuracy, setAccuracy] = useState<string>('');
     const [codeLines, setCodeLines] = useState<string[]>([]);
-    const [extraIndentation, setExtraIndentation] = useState<boolean>(false);
     const [charMap, setCharMap] = useState(new Map<number, number>());
-    const identationSpace = "    ";
 
     useEffect(() => {
         const code = RandomCode();
@@ -65,63 +63,49 @@ export default function CodeComponent() {
                 setAccuracy(accuracy);
                 handleRestart();
             }
-            if (typedChar === "{" || typedChar === ":") {
-                setExtraIndentation(true)
-            } else {
-                setExtraIndentation(false)
-            }
         }
     };
 
     const handleKeyPress = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
         const textarea = event.currentTarget;
-        const cursorPosition = textarea.selectionStart;
-        const linesBeforeCursor = inputValue.substring(0, cursorPosition).split('\n');
-        const currentLineIndex = linesBeforeCursor.length - 1;
+        let cursorPosition = textarea.selectionStart;
+        const totalLines = inputValue.substring(0, cursorPosition).split('\n');
+        const currentLineIndex = totalLines.length - 1;
         const currentLine = codeLines[currentLineIndex];
         const totalCharsUpToCurrentLine = charMap.get(currentLineIndex - 1) || 0;
         const textBeforeCursor = inputValue.substring(0, cursorPosition);
         const lastCharacter = textBeforeCursor.slice(-1);
-        const lastFourCharacters = textBeforeCursor.slice(-4);
-        const isIndentationSpace = lastFourCharacters === identationSpace;
-
+        const nextLine = codeLines[totalLines.length]
         if (event.key === "Enter") {
             event.preventDefault();
             const isLast = cursorPosition - totalCharsUpToCurrentLine;
             const isEnd = isLast === currentLine.length;
             const matched = currentLine.slice(-1) === lastCharacter
             if (currentLine == "") {
-                let updatedValue = inputValue.slice(0, cursorPosition) + '\n';
+                let updatedValue = inputValue + '\n'
                 setNumLines(numLines + 1);
                 setInputValue(updatedValue);
             }
             if (matched && isEnd) {
-                const indentation = currentLine.match(/^\s*/)?.[0] || '';
-                let updatedValue = inputValue.slice(0, cursorPosition) + '\n';
-                if (codeLines[currentLineIndex + 1] != "") {
-                    if (extraIndentation) {
-                        updatedValue += identationSpace + indentation;
-                        setExtraIndentation(false);
+                let i = 0;
+                while (i < nextLine.length) {
+                    if (nextLine[i] === ' ') {
+                        i++;
                     } else {
-                        updatedValue += indentation;
+                        break;
                     }
                 }
+                textarea.selectionStart = textarea.selectionEnd = cursorPosition + i + 1;
+                let updatedValue = inputValue + '\n' + ' '.repeat(i)
                 setNumLines(numLines + 1);
                 setInputValue(updatedValue);
             }
         }
         if (event.key === "Tab") {
             event.preventDefault();
-            let updatedValue = inputValue;
-            updatedValue += identationSpace;
-            setInputValue(updatedValue);
         }
         if (event.key === "Backspace") {
             event.preventDefault();
-            if (isIndentationSpace) {
-                const updatedValue = inputValue.slice(0, cursorPosition - 4) + inputValue.slice(cursorPosition);
-                setInputValue(updatedValue);
-            }
         }
     };
 

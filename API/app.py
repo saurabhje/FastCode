@@ -20,6 +20,7 @@ app.config['MYSQL_USER'] = os.environ.get('MYSQL_USER')
 app.config['MYSQL_PASSWORD'] = os.environ.get('MYSQL_PASSWORD')
 app.config['MYSQL_HOST'] = os.environ.get('MYSQL_HOST')
 app.config['MYSQL_DB'] = os.environ.get('MYSQL_DB')
+app.config['MYSQL_PORT'] = 19228
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 app.config["JWT_SECRET_KEY"] = os.environ.get('JWT_SECRET_KEY')
 
@@ -32,7 +33,7 @@ bcrypt = Bcrypt(app)
 def index():
     try:
         cur = mysql.connection.cursor()
-        cur.execute('SELECT * FROM users ORDER BY RAND() LIMIT 1')
+        cur.execute('SHOW TABLES')
         results = cur.fetchone() 
         cur.close()  
         if results:
@@ -95,4 +96,15 @@ def insert():
         return {'message': 'user created successfully'}, 200
     except Exception as e:
         return {'error': str(e)}, 400
-
+    
+@app.route('/createdb')
+def createdb():
+    try:
+        cur = mysql.connection.cursor()
+        cur.execute()
+        cur.close()
+        return {'true': 'done'}
+    
+    except Exception as e:
+        return {'failed': str(e)}
+    

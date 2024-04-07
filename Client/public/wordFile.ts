@@ -25095,36 +25095,39 @@ export const preparr = ["aboard", "about", "above", "across", "after", "against"
 "via", "with", "within", "without"]
 
 export const codes = [
-    `function sum(n1, n2){
-    const num = 10
-    const diny = 8
-    sum = num + din
-    return sum`,
-    `def ambigousSubarray(nums):
-    hashmap = {}
-    count = 0
-    length = 0
-    for i, n in enumerate(nums):
-        if n == 0:
-            count -= 1
-        else:
-            count += 1
-            if count == 0:
-                length = i + 1
-            else:
-                if count not in hashmap:
-                    hashmap[count] = i
-                else:
-                    length = max(length - hashmap[count])
-            return length`,
+//     `function sum(n1, n2){
+//     const num = 10
+//     const diny = 8
+//     sum = num + din
+//     return sum`,
+//     `def ambigousSubarray(nums):
+
+//     hashmap = {}
+//     count = 0
+//     length = 0
+//     for i, n in enumerate(nums):
+//         if n == 0:
+//             count -= 1
+//         else:
+//             count += 1
+//             if count == 0:
+//                 length = i + 1
+//             else:
+//                 if count not in hashmap:
+//                     hashmap[count] = i
+//                 else:
+//                     length = max(length - hashmap[count])
+//             return length`,
 `#include<iostream>
 using namespace std;
+
 int main(){
     int num = 10
     int next = num++;
     cout << num <<endl << next;
     return 0;
-}`,`#include <bits/stdc++.h>
+}`,
+`#include <bits/stdc++.h>
 using namespace std;
 int main()
 
@@ -25159,7 +25162,6 @@ int main()
         self.i = min(steps + self.i, self.len)
         return self.history[self.i]`,
 `function(c,c2):
-
     sum = 10 + 100
     comp = 'hello'
     for i in range(h):
@@ -25174,36 +25176,16 @@ int main()
     console.log(code)
     return code;
 }`,
-`def findKpath(flights, src, dst, k):
-prices = [float("inf)] * n
-prices[src] = 0
-for i in range(k+1):
-    tempprice = prices.copy()
-    for s, p, d in flights:
-        if prices[s] == float("inf"):
-            continue
-        if prices[s] + p < tempprice[d]:
-            tempprice[d] = prices[s] + p
-    prices = tempprice
-return -1 if prices[dst] == float("inf) else prices[dst]`,
-`def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
-PreMap = collections.defaultdict(list)
-for crs, pre in prerequisites:
-    PreMap[crs].append(pre)
-
-visited = set()
-def dfs(crs):
-    if crs in visited:
-        return False
-    if PreMap[crs] == []:
-        return True
-    visited.add(crs)
-    for pre in PreMap[crs]:
-       if not dfs(pre): return False
-    visited.remove(crs)
-    PreMap[crs] = []
-    return True
-for crs in range(numCourses):
-    if not dfs(crs): return False
-return True`,
+// `def findKpath(flights, src, dst, k):
+// prices = [float("inf")] * n
+// prices[src] = 0
+// for i in range(k+1):
+//     tempprice = prices.copy()
+//     for s, p, d in flights:
+//         if prices[s] == float("inf"):
+//             continue
+//         if prices[s] + p < tempprice[d]:
+//             tempprice[d] = prices[s] + p
+//     prices = tempprice
+// return -1 if prices[dst] == float("inf") else prices[dst]`,
 ]

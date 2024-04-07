@@ -35,7 +35,7 @@ function CodeInput({
     <div className="w-3/4 lg:w-1/2 ml-5 lg:ml-0">
       <textarea
         ref={inputRef}
-        className={`text-lg w-full mt-5 lg:mt-0 self-start lg:text-normal border-b-2 bg-transparent text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-foreground focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50 duration-300 ease-in-out border-b-${numLines} resize-none`}
+        className={`text-lg w-full mt-5 lg:mt-0 self-start lg:text-normal border-b-2 bg-transparent text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-foreground focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50 duration-300 ease-in-out border-b-${numLines} resize-none font-mono leading-snug`}
         value={inputValue}
         onChange={handleInputChange}
         onKeyDown={handleKeyPress}
