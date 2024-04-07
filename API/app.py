@@ -37,7 +37,7 @@ def index():
         results = cur.fetchone() 
         cur.close()  
         if results:
-            return {'message': 'Initialized server and database'}, 200
+            return {'message': results}, 200
         else:
             return {'error':'failed to initialize database'}, 503
                    
