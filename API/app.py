@@ -31,10 +31,11 @@ jwt = JWTManager(app)
 mysql = MySQL(app)
 bcrypt = Bcrypt(app)
 
+
 # Essentially to keep the server alive
 @app.route('/')
 def index():
-    try:        
+    try:
         cur = mysql.connection.cursor()
         result = cur.execute('SHOW TABLES')    
         cur.close()  

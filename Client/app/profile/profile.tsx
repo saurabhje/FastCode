@@ -59,7 +59,7 @@ const ProfileData: React.FC<ProfileDataProps> = ({ profileData }) => {
                         <Card className='bg-background  shadow-none border border-zinc-600'>
                             <CardHeader>
                                 <CardTitle>
-                                    <p>+{profileData.code_tests_today != null ? profileData.code_tests_today : 'NaN'}</p>
+                                    <p>+{profileData.code_tests_today}</p>
                                 </CardTitle>
                                 <CardDescription >Total code tests taken</CardDescription>
                             </CardHeader>
@@ -67,7 +67,7 @@ const ProfileData: React.FC<ProfileDataProps> = ({ profileData }) => {
                         <Card className='bg-background  shadow-none border border-zinc-600'>
                             <CardHeader>
                                 <CardTitle>
-                                    <p>+{profileData.text_tests_today != null ? profileData.text_tests_today : 'NaN' }</p>
+                                    <p>+{profileData.text_tests_today}</p>
                                 </CardTitle>
                                 <CardDescription >Total text tests taken</CardDescription>
                             </CardHeader>
@@ -75,7 +75,7 @@ const ProfileData: React.FC<ProfileDataProps> = ({ profileData }) => {
                         <Card className=' bg-background shadow-none border border-zinc-600'>
                             <CardHeader>
                                 <CardTitle>
-                                    <p>{profileData.highest_text_wpm_today != null ? profileData.highest_text_wpm_today : 'NaN' }</p>
+                                    <p>{profileData.highest_text_wpm_today}</p>
                                 </CardTitle>
                                 <CardDescription >Highest text speed</CardDescription>
                             </CardHeader>
@@ -83,7 +83,7 @@ const ProfileData: React.FC<ProfileDataProps> = ({ profileData }) => {
                         <Card className=' bg-background shadow-none border border-zinc-600'>
                             <CardHeader>
                                 <CardTitle>
-                                    <p>{profileData.highest_text_accuracy_today  !== null ? profileData.highest_text_accuracy_today : 'NaN'}</p>
+                                    <p>{profileData.highest_text_accuracy_today}</p>
                                 </CardTitle>
                                 <CardDescription >Highest text accuracy</CardDescription>
                             </CardHeader>
@@ -91,7 +91,7 @@ const ProfileData: React.FC<ProfileDataProps> = ({ profileData }) => {
                         <Card className=' bg-background shadow-none border border-zinc-600'>
                             <CardHeader>
                                 <CardTitle>
-                                    <p>{profileData.highest_code_accuracy_today !== null ? profileData.highest_code_accuracy_today : 'NaN'}</p>
+                                    <p>{profileData.highest_code_accuracy_today}</p>
                                 </CardTitle>
                                 <CardDescription >Highest code accuracy</CardDescription>
                             </CardHeader>
@@ -135,7 +135,7 @@ const ProfileData: React.FC<ProfileDataProps> = ({ profileData }) => {
                         <Card className='bg-background  shadow-none border border-zinc-600'>
                             <CardHeader>
                                 <CardTitle>
-                                    <p>+{profileData.code_total_tests != null? profileData.code_total_tests : 'NaN'}</p>
+                                    <p>+{profileData.code_total_tests}</p>
                                 </CardTitle>
                                 <CardDescription >Total code tests taken</CardDescription>
                             </CardHeader>
@@ -143,7 +143,7 @@ const ProfileData: React.FC<ProfileDataProps> = ({ profileData }) => {
                         <Card className='bg-background  shadow-none border border-zinc-600'>
                             <CardHeader>
                                 <CardTitle>
-                                    <p>+{profileData.text_total_tests !== null ? profileData.text_total_tests : 'NaN'}</p>
+                                    <p>+{profileData.text_total_tests}</p>
                                 </CardTitle>
                                 <CardDescription >Total text tests taken</CardDescription>
                             </CardHeader>
@@ -151,7 +151,7 @@ const ProfileData: React.FC<ProfileDataProps> = ({ profileData }) => {
                         <Card className=' bg-background shadow-none border border-zinc-600'>
                             <CardHeader>
                                 <CardTitle>
-                                    <p>{profileData.highest_text_wpm_ever !== null? profileData.highest_code_wpm_ever : 'NaN'}</p>
+                                    <p>{profileData.highest_text_wpm_ever}</p>
                                 </CardTitle>
                                 <CardDescription >Highest text speed</CardDescription>
                             </CardHeader>

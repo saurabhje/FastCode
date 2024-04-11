@@ -16,20 +16,20 @@ def statUpdate(connector, id, wpm, accuracy, testType):
                         FROM users WHERE id = %s''', (id,))
             data = cur.fetchone()
             if data:
-                total_tests = data[f'{type_prefix}_total_tests'] + 1 if data[f'{type_prefix}_total_tests'] else 1
-                tests_today = data[f'{type_prefix}_tests_today'] + 1 if data[f'{type_prefix}_tests_today'] else 1
+                total_tests = data[f'{type_prefix}_total_tests'] + 1 
+                tests_today = data[f'{type_prefix}_tests_today'] + 1
                 total_accuracy_today = data[f'total_{type_prefix}_accuracy_today'] + accuracy
-                total_accuracy = data[f'total_{type_prefix}_accuracy'] + accuracy if data[f'total_{type_prefix}_accuracy'] else accuracy
-                total_wpm = data[f'total_{type_prefix}_wpm'] + wpm if data[f'total_{type_prefix}_wpm'] else wpm
+                total_accuracy = data[f'total_{type_prefix}_accuracy'] + accuracy
+                total_wpm = data[f'total_{type_prefix}_wpm'] + wpm 
                 total_wpm_today = data[f'total_{type_prefix}_wpm_today'] + wpm
                 highest_wpm_today = data[f'highest_{type_prefix}_wpm_today']
-                highest_wpm_ever = data[f'highest_{type_prefix}_wpm_ever'] if data[f'highest_{type_prefix}_wpm_ever'] else 0
+                highest_wpm_ever = data[f'highest_{type_prefix}_wpm_ever']
                 highest_accuracy_today = data[f'highest_{type_prefix}_accuracy_today']
 
                 if wpm > highest_wpm_today:
                     highest_wpm_today = wpm
-                    if wpm > highest_wpm_ever:
-                        highest_wpm_ever = wpm
+                if wpm > highest_wpm_ever:
+                    highest_wpm_ever = wpm
                 if accuracy > highest_accuracy_today:
                     highest_accuracy_today = accuracy
 

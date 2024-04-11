@@ -22,5 +22,7 @@
     0% {background-color: transparent;}
 }
 .blinker {
+  padding-top: 0;
+  padding-bottom: 0;
   animation: animate-bg 1s infinite;
 }

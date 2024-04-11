@@ -73,12 +73,17 @@ export default function RandPhrase(prop: randPhraseprop) {
         }
       }
       const getClassForIndex = (index: number) => {
+        let cn  = '';
+        if (index=== typedChars.length) {
+            cn =  'blinker '; // Apply the blinker class to the current character being typed
+        }
         if (typedChars[index] && !typedErr.includes(index)) {
-            return 'text-zinc-500';
+            return cn + 'text-zinc-500';
         } else if (typedErr.includes(index)) {
-            return 'text-red-500';
+            return cn + 'text-red-500';
         }
     };
+    
     return (
         <div className='w-3/4 mt-10'>
             <p className={`w-full text-xl mb-6 ${animateError ? 'animate-bounce1' : ''}`}>
