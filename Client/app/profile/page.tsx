@@ -9,7 +9,6 @@ export default async function ProfilePage() {
             try {
                 const cookie = await getToken();
                 const token = cookie?.value;
-
                 if (token) {
                     const response = await fetch(`${url}/profile`, {
                         method: 'GET',

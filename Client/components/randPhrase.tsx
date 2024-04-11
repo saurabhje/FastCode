@@ -2,8 +2,13 @@ import React, { useEffect, useRef, useState } from 'react';
 import Stats from './stats';
 import getRandomPhrase from './features/textRandomizer';
 import calculateWPM from './features/wpmCalci';
+import SendtestData from './features/sendData';
 
-export default function RandPhrase() {
+type randPhraseprop = {
+    ranked: boolean;
+  };
+export default function RandPhrase(prop: randPhraseprop) {
+    const {ranked} = prop;
     const [randPhrase, setRandPhrase] = useState<string>('');
     const [startTime, setStartTime] = useState<number | null>(null);
     const [typedChars, setTypedChars] = useState<string>("");
@@ -59,6 +64,10 @@ export default function RandPhrase() {
             const { wpm, accuracy } = calculateWPM(startTime!, value, typedErr);
             setWpm(wpm);
             setAccuracy(accuracy);
+            console.log("handleChange - SendtestData condition:", ranked);
+            if (ranked){
+                SendtestData(wpm, accuracy, 'text')
+            };
             handleRestart();
           }
         }

@@ -14,6 +14,7 @@ export async function Logout() {
     async function handleLogout(){
         await removeToken()
         router.replace('/')
+        window.location.reload();
     }
   return (
     <DropdownMenu>

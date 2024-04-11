@@ -10,7 +10,7 @@ export default async function NavBar() {
             <div className="mb-2 sm:mb-0">
                 <a href="/" className="text-2xl">KeyScripter</a>
             </div>
-            <div className="flex items-center gap-10">
+            <div className="flex items-center gap-5 md:gap-7">
                 <ModeToggle />
                 <Link href="/#" className="text-lg no-underline  hover:text-gray-500">Two</Link>
                 {bool ? <Logout /> : <Link href="/login" className="text-lg no-underline  hover:text-gray-600">Login</Link>}

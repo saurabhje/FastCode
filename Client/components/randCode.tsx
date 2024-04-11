@@ -3,8 +3,12 @@ import RandomCode from "./features/codeRandomizer";
 import calculateWPM from "./features/wpmCalci";
 import CodeInput from "./codeInput";
 import CodeSnippet from "./codeComponent";
-
-export default function CodeComponent() {
+import SendtestData from "./features/sendData";
+type codeComponentprop = {
+    ranked: boolean;
+  };
+export default function CodeComponent(prop: codeComponentprop) {
+    const { ranked } = prop;
     const [randCode, setRandCode] = useState<string>('');
     const [inputValue, setInputValue] = useState<string>("");
     const [numLines, setNumLines] = useState<number>(1);
@@ -61,6 +65,9 @@ export default function CodeComponent() {
                 const { wpm, accuracy } = calculateWPM(startTime!, val, typedErr);
                 setWpm(wpm);
                 setAccuracy(accuracy);
+                if(ranked) {
+                    SendtestData(wpm, accuracy, 'code');
+                };
                 handleRestart();
             }
         }
