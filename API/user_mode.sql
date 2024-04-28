@@ -6,7 +6,6 @@ CREATE TABLE IF NOT EXISTS `users`(
     `name` VARCHAR(20) NOT NULL,
     `password` VARCHAR(80) NOT NULL,
     `email` VARCHAR(50) NOT NULL,
-    `last_updated` DATE,
     `text_total_tests` INT DEFAULT 0,
     `text_tests_today` INT DEFAULT 0,
     `code_total_tests` INT DEFAULT 0,
@@ -28,8 +27,20 @@ CREATE TABLE IF NOT EXISTS `users`(
     PRIMARY KEY (`id`),
     UNIQUE (`email`)
 );
-
-
+-- Resetting the Today fields to 0 using a cron-Job
+UPDATE users SET
+        text_tests_today = 0,
+        code_tests_today = 0,
+        total_code_accuracy_today = 0,
+        total_text_accuracy_today = 0,
+        total_code_wpm_today = 0,
+        total_text_wpm_today = 0,
+        highest_text_wpm_today = 0,
+        highest_text_accuracy_today = 0,
+        highest_code_accuracy_today = 0,                                   
+        highest_code_wpm_today = 0
+    
+                            
 --Deleting a table, i created for testing
 DROP TABLE Example
 

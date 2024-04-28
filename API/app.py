@@ -9,7 +9,7 @@ from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
 from flask_jwt_extended import JWTManager
-from datetime import datetime, timedelta
+from datetime import timedelta
 from dotenv import load_dotenv
 import os
 
@@ -37,7 +37,24 @@ bcrypt = Bcrypt(app)
 def index():
     try:
         cur = mysql.connection.cursor()
-        result = cur.execute('SHOW TABLES')    
+        result = cur.execute('''SHOW TABLES''')
+        cur.close()
+        if result:
+            return {'message': result}, 200
+        else:
+            return {'message': ':('}, 200
+            
+                   
+    except Exception as e:
+        return {'error': 'Failed to communicate with server'}, 500
+
+# Route to fetch all the profiles 
+@app.route('/p')
+def change():
+    try:
+        cur = mysql.connection.cursor()
+        cur.execute('SELECT * FROM users')   
+        result = cur.fetchall() 
         cur.close()  
         if result:
             return {'Tables' : result}
@@ -46,7 +63,7 @@ def index():
                    
     except Exception as e:
         return {'error': 'failed to communicate with server'}, 500
-
+            
 # loggin in
 @app.route('/login', methods=['POST'])
 def check_cred():

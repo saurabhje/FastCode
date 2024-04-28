@@ -83,6 +83,14 @@ const ProfileData: React.FC<ProfileDataProps> = ({ profileData }) => {
                         <Card className=' bg-background shadow-none border border-zinc-600'>
                             <CardHeader>
                                 <CardTitle>
+                                    <p>{profileData.highest_code_wpm_today}</p>
+                                </CardTitle>
+                                <CardDescription >Highest code speed</CardDescription>
+                            </CardHeader>
+                        </Card>
+                        <Card className=' bg-background shadow-none border border-zinc-600'>
+                            <CardHeader>
+                                <CardTitle>
                                     <p>{profileData.highest_text_accuracy_today}</p>
                                 </CardTitle>
                                 <CardDescription >Highest text accuracy</CardDescription>
@@ -152,6 +160,14 @@ const ProfileData: React.FC<ProfileDataProps> = ({ profileData }) => {
                             <CardHeader>
                                 <CardTitle>
                                     <p>{profileData.highest_text_wpm_ever}</p>
+                                </CardTitle>
+                                <CardDescription >Highest text speed</CardDescription>
+                            </CardHeader>
+                        </Card>
+                        <Card className=' bg-background shadow-none border border-zinc-600'>
+                            <CardHeader>
+                                <CardTitle>
+                                    <p>{profileData.highest_code_wpm_ever}</p>
                                 </CardTitle>
                                 <CardDescription >Highest text speed</CardDescription>
                             </CardHeader>
