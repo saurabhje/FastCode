@@ -144,12 +144,12 @@ def requestChangepassword():
         cur.execute('SELECT id FROM users WHERE email=%s', (email,))
         id = cur.fetchone()
         if not id:
-            return {'error': 'Email already registered'}, 409
+            return {'error': 'Email not registered'}, 401
         changeLink = f"{url}/changepassword/{id['id']}"
         sendChangeMail(changeLink, mail, email)
         return {'message': 'Password change email sent successfully'}, 200
     except Exception as e:
-        return {'error': str(e)}, 401
+        return {'error': str(e)}, 500
     
 @app.route('/changepassword/<id>', methods=['GET','POST'])
 def resetpassword(id):
