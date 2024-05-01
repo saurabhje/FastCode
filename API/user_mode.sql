@@ -3,7 +3,7 @@
 --Creating users table, general schema pattern
 CREATE TABLE IF NOT EXISTS `users`(
     `id` INT(4) NOT NULL AUTO_INCREMENT,
-    `name` VARCHAR(20) NOT NULL,
+    `name` VARCHAR(50) NOT NULL,
     `password` VARCHAR(80) NOT NULL,
     `email` VARCHAR(50) NOT NULL,
     `text_total_tests` INT DEFAULT 0,

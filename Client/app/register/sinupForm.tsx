@@ -12,14 +12,28 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useRouter } from "next/navigation"
+import { useState } from "react"
 const url = process.env.NEXT_PUBLIC_URL
 
 export default function SignUp(){
     const { toast } = useToast()
     const router = useRouter()
-    
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const [passwordError, setPasswordError] = useState("");
+  
+    const validatePasswords = () => {
+      if (password !== confirmPassword) {
+        setPasswordError('Passwords do not match')
+        return false;
+      }
+      return true;
+    };
+
     const onSubmit = async (e: any) => {
-        e.preventDefault();
+      e.preventDefault();
+      const isValid = validatePasswords();
+      if (!isValid) return;
         let data = {
             name: e.target[0].value + ' ' + e.target[1].value,
             email: e.target[2].value,
@@ -36,13 +50,20 @@ export default function SignUp(){
             const result = await response.json();
             if (response.ok) {
                 toast({
-                    title: 'Sign up successful',
-                    description : 'Login to access dashboard',
-                    duration: 2000
+                    title: 'Verify your email',
+                    description : 'Sent confirmation email link',
+                    duration: 3000
                 })
-                router.replace("/login")
-            } else {
-                throw new Error('Failed to create user', result.error);
+            }
+            else if(response.status === 409){
+              toast({
+                  title : "Email already registered",
+                  duration: 1500
+              });
+              router.replace("/login")
+          }
+            else {
+                throw new Error(result.error);
             }
             
         } catch (error) {
@@ -54,7 +75,7 @@ export default function SignUp(){
     }
 
     return (
-        <Card className="mx-auto max-w-sm">
+        <Card className="mx-auto max-w-md">
           <CardHeader>
             <CardTitle className="text-xl">Sign Up</CardTitle>
             <CardDescription>
@@ -67,11 +88,11 @@ export default function SignUp(){
               <div className="grid grid-cols-2 gap-4">
                 <div className="grid gap-2">
                   <Label htmlFor="first-name">First name</Label>
-                  <Input id="first-name" placeholder="Saurabh" required />
+                  <Input id="first-name" minLength={4} maxLength={10} placeholder="Saurabh" required />
                 </div>
                 <div className="grid gap-2">
                   <Label htmlFor="last-name">Last name</Label>
-                  <Input id="last-name" placeholder="Chandel" required />
+                  <Input id="last-name" minLength={4} maxLength={10} placeholder="Chandel" required />
                 </div>
               </div>
               <div className="grid gap-2">
@@ -83,17 +104,23 @@ export default function SignUp(){
                   required
                 />
               </div>
-              <div className="grid gap-2">
-                <Label htmlFor="password">Password</Label>
-                <Input id="password" type="password" />
+              <div className="grid grid-cols-2 gap-4">
+                <div className="grid gap-2">
+                  <Label htmlFor="password">Password</Label>
+                  <Input id="password" type="password" minLength={8} maxLength={16} required onChange={(e) => setPassword(e.target.value)}/>
+                </div>
+                <div className="grid gap-2">
+                  <Label htmlFor="confirmpassword">Confirm Password</Label>
+                  <Input id="confirmpassword" type="password" required onChange={(e) => setConfirmPassword(e.target.value)}/>
+                </div>
+                {passwordError && <div className="text-xs text-red-500">{passwordError}</div>}
               </div>
               <Button type="submit" className="w-full">
                 Create an account
               </Button>
-              {/* --------hmmmmmm Maybe in coming release---------
               <Button variant="outline" className="w-full">
                 Sign up with GitHub
-              </Button> */}
+              </Button>
             </div>
             <div className="mt-4 text-center text-sm">
               Already have an account?{" "}
