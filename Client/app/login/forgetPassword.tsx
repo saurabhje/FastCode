@@ -42,7 +42,7 @@ export function ForgetPassword() {
                     title: 'Email is not registered',
                     description: 'Register your email with a new account'
                 });
-                router.replace('/signup')
+                router.replace('/register')
             } else {
                 throw new Error(result.err);
             }
