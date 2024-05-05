@@ -39,10 +39,10 @@ const ProfileData: React.FC<ProfileDataProps> = ({ profileData }) => {
     const avgCodeSpeedToday = (profileData.total_code_wpm_today / profileData.code_tests_today).toFixed(2);
     const avgTextAccuracyToday = (profileData.total_text_accuracy_today / profileData.text_tests_today).toFixed(2);
     const avgTextSpeedToday = (profileData.total_text_wpm_today / profileData.text_tests_today).toFixed(2);
-    const avgCodeAccuracy = (profileData.total_code_accuracy_today / profileData.code_total_tests).toFixed(2);
-    const avgCodeSpeed = (profileData.total_code_wpm_today / profileData.code_total_tests).toFixed(2);
-    const avgTextAccuracy = (profileData.total_text_accuracy_today / profileData.text_total_tests).toFixed(2);
-    const avgTextSpeed = (profileData.total_text_wpm_today / profileData.text_total_tests).toFixed(2);
+    const avgCodeAccuracy = (profileData.total_code_accuracy / profileData.code_total_tests).toFixed(2);
+    const avgCodeSpeed = (profileData.total_code_wpm / profileData.code_total_tests).toFixed(2);
+    const avgTextAccuracy = (profileData.total_text_accuracy / profileData.text_total_tests).toFixed(2);
+    const avgTextSpeed = (profileData.total_text_wpm / profileData.text_total_tests).toFixed(2);
     
     return (
         <div className='py-4 px-4 lg:px-20 flex flex-col items-center'>

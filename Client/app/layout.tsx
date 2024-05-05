@@ -5,6 +5,7 @@ import "./globals.css";
 import { Toaster } from "@/components/ui/toaster"
 import { cn } from "../lib/utils";
 import { ThemeProvider } from "@/components/theme-Provider";
+import NavBar from "@/components/navbar";
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
@@ -35,6 +36,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <NavBar />
           {children}
           <Toaster />
         </ThemeProvider>

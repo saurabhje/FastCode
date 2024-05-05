@@ -8,7 +8,6 @@ export default async function home(){
   const present = token?.value !== undefined;
   return(
     <div>
-      <NavBar/>
       <TypingGame present={present} />
     </div>
   )

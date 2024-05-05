@@ -33,7 +33,6 @@ export default async function ProfilePage() {
     let profileData = await fetchData();
     return (
         <main>
-            <NavBar />
             <ProfileData profileData={profileData} />
         </main>
     );
