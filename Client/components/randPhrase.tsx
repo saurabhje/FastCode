@@ -3,6 +3,7 @@ import Stats from './stats';
 import getRandomPhrase from './features/textRandomizer';
 import calculateWPM from './features/wpmCalci';
 import SendtestData from './features/sendData';
+import KeyboardLayout from './keyboard';
 
 type randPhraseprop = {
     ranked: boolean;
@@ -109,6 +110,7 @@ export default function RandPhrase(prop: randPhraseprop) {
                 }}
             />
             <Stats accuracy={accuracy} wpm={wpm} />
+            <KeyboardLayout />
         </div>
     )
 }

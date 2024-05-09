@@ -19,7 +19,7 @@ export default function TypingGame(props: TypingGameProps) {
   }
 
   return (
-    <div className="py-4 px-4 lg:px-20 flex flex-col items-center">
+    <div className="flex flex-col items-center py-4 w-full">
       <div className="flex items-center justify-between w-full">
         <div className="flex items-center space-x-2">
           <Checkbox

@@ -1,8 +1,4 @@
-alembic==1.13.1
 bcrypt==4.1.2
-blinker==1.7.0
-cffi==1.16.0
-click==8.1.7
 cryptography==42.0.5
 Flask==3.0.2
 Flask-Bcrypt==1.0.1
@@ -11,7 +7,6 @@ Flask-JWT-Extended==4.6.0
 Flask-Mail==0.9.1
 Flask-Migrate==4.0.7
 Flask-MySQLdb==2.0.0
-Flask-SQLAlchemy==3.1.1
 greenlet==3.0.3
 gunicorn==22.0.0
 itsdangerous==2.2.0
@@ -25,6 +20,5 @@ pycparser==2.22
 PyJWT==2.8.0
 PyMySQL==1.1.0
 python-dotenv==1.0.1
-SQLAlchemy==2.0.29
 typing_extensions==4.11.0
 Werkzeug==3.0.1
