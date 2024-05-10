@@ -29,7 +29,7 @@ const KeyboardLayout = () => {
   const fourthRow = [ ['KeyZ', 'Z'], ['KeyX', 'X'], ['KeyC', 'C'], ['KeyV', 'V'], ['KeyB', 'B'], ['KeyN', 'N'], ['KeyM', 'M'], ['Comma', ','], ['Period', '.'], ['Slash', '/'] ]
 
   return (
-    <div id="keyboard" className="my-20 flex flex-col max-w-[1008px] min-w-[600px] w-full bg-black text-white p-1 rounded">
+    <div id="keyboard" className="my-20 flex flex-col max-w-[1008px] min-w-[600px] w-full bg-black text-white p-1 rounded overflow-x-hidden">
       <div className="flex">
         <div className={`key flex justify-center items-center h-10 min-w-10 flex-grow m-1 ${pressedKey == 'Backquote' ? 'bg-zinc-400' : 'bg-red-800 transition-colors duration-500'}`}>`</div>
         {firstRow.map((key, index) => (
