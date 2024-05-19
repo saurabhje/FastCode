@@ -8,7 +8,7 @@ export default async function NavBar() {
     const cookie = await getToken()
     let bool = cookie?.value
     return (
-        <nav className="sticky top-0 flex justify-between items-center px-4 py-3 md:px-20 backdrop-blur-md bg-background/80">
+        <nav className="sticky top-0 flex justify-between items-center px-4 py-3 md:px-16 backdrop-blur-md bg-background/80 z-50">
             <div className="mb-2 sm:mb-0 flex items-center gap-2">
                 <Image src={logo} height={32} width={32} alt="logo"/>
                 <a href="/" className="text-xl md:text-2xl">keyscripter</a>

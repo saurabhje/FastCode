@@ -26,7 +26,6 @@ export default function RandPhrase(prop: randPhraseprop) {
                 inputRef.current.focus();
             }
         }
-        handleKeydown()
         window.addEventListener('keydown', handleKeydown)
         return () =>{
             window.removeEventListener('keydown', handleKeydown) 
@@ -86,7 +85,7 @@ export default function RandPhrase(prop: randPhraseprop) {
     };
     
     return (
-        <div className='w-3/4 mt-10'>
+        <div className='w-full md:w-3/4 mt-10'>
             <p className={`w-full text-xl mb-6 ${animateError ? 'animate-bounce1' : ''}`}>
                 {randPhrase.split('').map((char, index) => (
                     <span
@@ -99,7 +98,7 @@ export default function RandPhrase(prop: randPhraseprop) {
             </p>
             <input
                 ref={inputRef}
-                className="w-full text-xl border-b-2 border-blue-gray-200 bg-transparent text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-foreground focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50 duration-1000 ease-in-out"
+                className="w-full text-xl border-b-2 border-bborder bg-transparent text-blue-gray-700 outline-none transition-all placeholder-shown:border-blue-gray-200 focus:border-foreground focus:outline-none disabled:border-0 disabled:bg-blue-gray-50 duration-1000 ease-in-out"
                 value={typedChars}
                 spellCheck= 'false'
                 onChange={handleChange}
