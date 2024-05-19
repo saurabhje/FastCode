@@ -39,7 +39,7 @@ const ScrollToTypingGame: React.FC<ScrollToTypingGameProps> = ({ present}) => {
             <p className='text-5xl'>Device not supported</p>
             <p className='text-muted-foreground'>This application is made for typing on computers, please use it on a PC.</p>
             <div className='flex items-center justify-center gap-3'>
-                <Button onClick={() => setexplore(true)}>Explore</Button>
+                <Button onClick={() => setexplore(!explore)}>Explore</Button>
                 <Button onClick={closeTab}>Close Tab</Button>
             </div>
         </div> 

@@ -43,7 +43,7 @@ export default function TypingGame(props: TypingGameProps) {
           <label htmlFor="moder" className="text-base">Code</label>
         </div>
       </div>
-      {mode === 'text' ? <RandPhrase ranked={ranked} explore={explore}/> : <RandCode ranked={ranked} />}
+      {mode === 'text' ? <RandPhrase ranked={ranked} isMobile={isMobile}/> : <RandCode ranked={ranked} />}
     </div>
   );
 }
