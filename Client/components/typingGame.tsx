@@ -7,12 +7,10 @@ import { Checkbox } from "@/components/ui/checkbox";
 
 type TypingGameProps = {
   present: boolean;
-  explore : boolean;
 };
 
 export default function TypingGame(props: TypingGameProps) {
   const { present } = props;
-  const { explore } = props;
   const [mode, setMode] = useState<string>('text');
   const [ranked, setRanked] = useState(false);
 
@@ -43,7 +41,7 @@ export default function TypingGame(props: TypingGameProps) {
           <label htmlFor="moder" className="text-base">Code</label>
         </div>
       </div>
-      {mode === 'text' ? <RandPhrase ranked={ranked} isMobile={isMobile}/> : <RandCode ranked={ranked} />}
+      {mode === 'text' ? <RandPhrase ranked={ranked}/> : <RandCode ranked={ranked} />}
     </div>
   );
 }

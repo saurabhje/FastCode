@@ -7,11 +7,9 @@ import KeyboardLayout from './keyboard';
 
 type randPhraseprop = {
     ranked: boolean;
-    isMobile : boolean;
   };
 export default function RandPhrase(prop: randPhraseprop) {
     const {ranked} = prop;
-    const {isMobile} = prop;
     const [randPhrase, setRandPhrase] = useState<string>('');
     const [startTime, setStartTime] = useState<number | null>(null);
     const [typedChars, setTypedChars] = useState<string>("");
@@ -28,6 +26,7 @@ export default function RandPhrase(prop: randPhraseprop) {
                 inputRef.current.focus();
             }
         }
+        console.log(isMobile)
         window.addEventListener('keydown', handleKeydown)
         return () =>{
             window.removeEventListener('keydown', handleKeydown) 
@@ -42,7 +41,9 @@ export default function RandPhrase(prop: randPhraseprop) {
         setAnimateError(false);
       }
 
-
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(
+        typeof window === "undefined" ? "" : window.navigator.userAgent
+      );
     function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
         const value = e.target.value;
         if (!startTime) {
@@ -111,7 +112,7 @@ export default function RandPhrase(prop: randPhraseprop) {
                 }}
             />
             <Stats accuracy={accuracy} wpm={wpm} />
-            {isMobile ?? <KeyboardLayout />}
+            {!isMobile && <KeyboardLayout />}
         </div>
     )
 }
