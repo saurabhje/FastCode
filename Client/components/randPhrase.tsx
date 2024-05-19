@@ -7,9 +7,11 @@ import KeyboardLayout from './keyboard';
 
 type randPhraseprop = {
     ranked: boolean;
+    explore : boolean;
   };
 export default function RandPhrase(prop: randPhraseprop) {
     const {ranked} = prop;
+    const {explore} = prop;
     const [randPhrase, setRandPhrase] = useState<string>('');
     const [startTime, setStartTime] = useState<number | null>(null);
     const [typedChars, setTypedChars] = useState<string>("");
@@ -109,7 +111,7 @@ export default function RandPhrase(prop: randPhraseprop) {
                 }}
             />
             <Stats accuracy={accuracy} wpm={wpm} />
-            <KeyboardLayout />
+            {explore ?? <KeyboardLayout />}
         </div>
     )
 }
