@@ -26,7 +26,6 @@ export default function RandPhrase(prop: randPhraseprop) {
                 inputRef.current.focus();
             }
         }
-        console.log(isMobile)
         window.addEventListener('keydown', handleKeydown)
         return () =>{
             window.removeEventListener('keydown', handleKeydown) 

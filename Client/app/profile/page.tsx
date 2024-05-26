@@ -32,7 +32,7 @@ export default async function ProfilePage() {
 
     let profileData = await fetchData();
     return (
-        <main>
+        <main className="py-6 px-4 lg:px-16">
             <ProfileData profileData={profileData} />
         </main>
     );

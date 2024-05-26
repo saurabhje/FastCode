@@ -30,6 +30,8 @@ export default function CodeComponent(prop: codeComponentprop) {
         fillMap(lines)
     }, []);
 
+
+
     function fillMap(lines: string[]) {
         const charMap = new Map<number, number>();
         let cumulativeLength = 0;

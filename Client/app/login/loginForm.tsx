@@ -1,9 +1,11 @@
 'use client'
+import { useState } from "react";
 import { ForgetPassword } from "./forgetPassword";
 import { Button } from "@/components/ui/button"
 import { useToast } from "@/components/ui/use-toast"
 import { storeToken } from "@/components/features/storeToken";
 import { useRouter } from 'next/navigation'
+import BounceLoader from "@/components/ui/loader";
 import Link from "next/link"
 import {
   Card,
@@ -24,11 +26,13 @@ import { Label } from "@/components/ui/label"
 const url = process.env.NEXT_PUBLIC_URL
 
 export default function Login(){
+    const [requestMade, setRequestMade] = useState(false)
     const { toast } = useToast()
     const router = useRouter()
 
     const onSubmit = async (e: any) => {
         e.preventDefault();
+        setRequestMade(true)
         const data = {
             email : e.target[0].value,
             password : e.target[1].value
@@ -54,6 +58,7 @@ export default function Login(){
                 }
             router.replace("/")
             }else{
+                setRequestMade(false)
                 throw new Error(result.error);
             }}catch(error){
                 toast({
@@ -88,7 +93,7 @@ export default function Login(){
                 <Input id="password" type="password" required />
               </div>
               <Button type="submit" className="w-full">
-                Login
+                {requestMade ? <BounceLoader /> : "Login"}
               </Button>
 {/*               <Button variant="outline" className="w-full">
                 Sign in with GitHub

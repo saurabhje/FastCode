@@ -2,6 +2,7 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { useToast } from "@/components/ui/use-toast"
+import BounceLoader from "@/components/ui/loader"
 import {
   Card,
   CardContent,
@@ -18,6 +19,7 @@ const url = process.env.NEXT_PUBLIC_URL
 export default function SignUp(){
     const { toast } = useToast()
     const router = useRouter()
+    const [requestmade, setRequestMade] = useState(false)
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [passwordError, setPasswordError] = useState("");
@@ -27,6 +29,7 @@ export default function SignUp(){
         setPasswordError('Passwords do not match')
         return false;
       }
+      setPasswordError("");
       return true;
     };
 
@@ -34,6 +37,7 @@ export default function SignUp(){
       e.preventDefault();
       const isValid = validatePasswords();
       if (!isValid) return;
+      setRequestMade(true)
         let data = {
             name: e.target[0].value + ' ' + e.target[1].value,
             email: e.target[2].value,
@@ -54,6 +58,7 @@ export default function SignUp(){
                     description : 'Sent confirmation email link',
                     duration: 3000
                 })
+            setRequestMade(false)
             }
             else if(response.status === 409){
               toast({
@@ -63,6 +68,7 @@ export default function SignUp(){
               router.replace("/login")
           }
             else {
+                setRequestMade(false)
                 throw new Error(result.error);
             }
             
@@ -116,7 +122,7 @@ export default function SignUp(){
                 {passwordError && <div className="text-xs text-red-500">{passwordError}</div>}
               </div>
               <Button type="submit" className="w-full">
-                Create an account
+               {requestmade? <BounceLoader/> : "Create an account"}
               </Button>
 {/*               <Button variant="outline" className="w-full">
                 Sign up with GitHub

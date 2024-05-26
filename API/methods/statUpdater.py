@@ -13,6 +13,7 @@ def statUpdate(connector, id, wpm, accuracy, testType):
                         highest_{type_prefix}_wpm_ever,
                         highest_{type_prefix}_wpm_today,
                         highest_{type_prefix}_accuracy_today
+                        highest_code_accuracy_ever,
                         FROM users WHERE id = %s''', (id,))
             data = cur.fetchone()
             if data:
@@ -25,11 +26,14 @@ def statUpdate(connector, id, wpm, accuracy, testType):
                 highest_wpm_today = data[f'highest_{type_prefix}_wpm_today']
                 highest_wpm_ever = data[f'highest_{type_prefix}_wpm_ever']
                 highest_accuracy_today = data[f'highest_{type_prefix}_accuracy_today']
+                highest_accuracy_ever =  data['highest_code_accuracy_ever']
 
                 if wpm > highest_wpm_today:
                     highest_wpm_today = wpm
                 if wpm > highest_wpm_ever:
                     highest_wpm_ever = wpm
+                if testType == 'code' and accuracy > highest_accuracy_ever:
+                    highest_accuracy_ever = accuracy
                 if accuracy > highest_accuracy_today:
                     highest_accuracy_today = accuracy
 
@@ -42,11 +46,12 @@ def statUpdate(connector, id, wpm, accuracy, testType):
                         highest_{type_prefix}_wpm_ever = %s,
                         highest_{type_prefix}_wpm_today = %s,
                         highest_{type_prefix}_accuracy_today = %s
+                        highest_code_accuracy_ever = %s
                         WHERE id = %s''',
                         (total_tests, tests_today, total_accuracy_today,
                          total_accuracy, total_wpm, total_wpm_today,
                          highest_wpm_ever, highest_wpm_today,
-                         highest_accuracy_today, id))
+                         highest_accuracy_today, highest_accuracy_ever, id))
         connector.connection.commit()
         cur.close()
         return {'msg': 'stat updted'}, 200
