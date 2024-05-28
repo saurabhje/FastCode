@@ -9,17 +9,21 @@ import {
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import BounceLoader from "@/components/ui/loader"
 import { useToast } from "@/components/ui/use-toast"
 import Error from "next/error"
 import { useRouter } from "next/navigation"
+import { useState } from "react"
 
 const url = process.env.NEXT_PUBLIC_URL
 export function ForgetPassword() {
+    const [requestMade, setRequestMade] =  useState(false)
     const { toast } = useToast()
     const router = useRouter()
 
     async function Submit(e: any) {
         e.preventDefault();
+        setRequestMade(true)
         const email = e.target[0].value;
         try {
             const response = await fetch(`${url}/changepassword`, {
@@ -46,6 +50,7 @@ export function ForgetPassword() {
             } else {
                 throw new Error(result.err);
             }
+            setRequestMade(false)
         } catch (error) {
             toast({
                 title: 'Uh oh! Something went wrong.',
@@ -68,7 +73,7 @@ export function ForgetPassword() {
                         <Label htmlFor="email">Email</Label>
                         <Input id="email" type="email" placeholder="m@example.com" required />
                     </div>
-                    <Button className="w-full" type="submit">Submit</Button>
+                    <Button className="w-full" type="submit">{requestMade? <BounceLoader /> : "Submit"}</Button>
                 </form>
             </CardContent>
         </Card>

@@ -1,9 +1,13 @@
-import NavBar from "@/components/navbar";
 import { getToken } from "@/components/features/storeToken";
 import ProfileData from "./profile";
+import { Metadata } from "next";
 
 const url = process.env.NEXT_PUBLIC_URL
 
+export const metadata: Metadata = {
+    title: 'Dashboard',
+    description: 'personalized dashboard for showing different statistics of the tests taken by the user in the typing application.'
+  }
 export default async function ProfilePage() {
         const fetchData = async () => {
             try {

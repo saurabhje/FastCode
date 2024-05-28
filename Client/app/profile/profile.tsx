@@ -4,7 +4,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import StatCard from './cardComp';
 import { Bar } from 'react-chartjs-2';
 import { Chart, BarElement, CategoryScale, LinearScale, Title, Tooltip, Legend } from 'chart.js';
-import { profile } from 'console';
 Chart.register(BarElement, CategoryScale, LinearScale, Title, Tooltip, Legend);
 
 type ProfileDataProps = {

@@ -68,10 +68,17 @@ const config: Config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        "loader" : {
+          to: {
+            opacity: "0.6",
+            transform: 'translate3d(0, -0.4rem, 0)'
+          },
+        }
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "loader" : "loader 0.6s infinite alternate"
       },
     },
   },

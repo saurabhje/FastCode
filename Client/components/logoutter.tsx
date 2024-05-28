@@ -13,13 +13,14 @@ export async function Logout() {
     const router = useRouter()
     async function handleLogout(){
         await removeToken()
+        window.localStorage.removeItem('ranked')
         router.replace('/')
         window.location.reload();
     }
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <p className="text-lg hover:text-gray-500 hover:cursor-pointer">Profile</p>
+        <p className="text-md md:text-lg hover:text-gray-500 hover:cursor-pointer">Profile</p>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuItem onClick={() => router.replace('/profile')}>

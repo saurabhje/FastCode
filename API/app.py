@@ -113,6 +113,30 @@ def registeration(mailToken):
         return {'error': 'Invalid or expired token'}, 400
         
 
+@app.route('/oauth', methods=['POST'])
+def oauthHandler():
+    data = request.get_json()
+    email = data['email']
+    name = data['name']
+    cur = mysql.connection.cursor()
+    cur.execute('SELECT id FROM users WHERE email=%s', (email,))
+    user = cur.fetchone()
+    expireTime = timedelta(days=10)
+    try:
+        if not user:
+            cur.execute('INSERT INTO users (name, password, email) VALUES (%s, %s, %s)', (name, 'oauthauser', email))
+            mysql.connection.commit()
+            new_user_id = cur.lastrowid
+            accessToken = create_access_token(identity=new_user_id, expires_delta= expireTime)
+            return {'accessToken' : accessToken}, 200
+        else:
+            accessToken = create_access_token(identity=user['id'], expires_delta= expireTime)
+            return {'accessToken' : accessToken}, 200
+    except Exception as e:
+        return {'error': str(e)}
+
+
+
 # Registering the user
 @app.route('/register', methods=['POST'])
 def insert():

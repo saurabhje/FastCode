@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import RandPhrase from "@/components/randPhrase";
 import RandCode from "@/components/randCode";
 import { Switch } from "@/components/ui/switch";
@@ -14,8 +14,22 @@ export default function TypingGame(props: TypingGameProps) {
   const [mode, setMode] = useState<string>('text');
   const [ranked, setRanked] = useState(false);
 
+  useEffect(() => {
+    const savedValue = window.localStorage.getItem("ranked");
+    if (savedValue !== null) {
+      setRanked(JSON.parse(savedValue));
+    }
+  }, []);
+
   function handleMode() {
     mode === 'code' ? setMode('text') : setMode('code');
+  }
+
+
+  function handleCheck() {
+    const newRanked = !ranked;
+    setRanked(newRanked);
+    window.localStorage.setItem("ranked", JSON.stringify(newRanked));
   }
 
   return (
@@ -26,7 +40,8 @@ export default function TypingGame(props: TypingGameProps) {
             id="terms"
             className="rounded-[2px]"
             disabled={!present}
-            onCheckedChange={() => setRanked(prevRanked => !prevRanked)}
+            checked={ranked}
+            onCheckedChange={handleCheck}
           />
           <label
             htmlFor="terms"
