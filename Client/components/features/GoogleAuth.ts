@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { authSender } from "../authSender";
 
-const useGoogleData = (user: {access_token: string} | null, setRequestMade: any) => {
+const useGoogleData = (user: {access_token: string} | null, setAuthMade: any) => {
     const router = useRouter()
 
     useEffect(()=>{
@@ -24,7 +24,7 @@ const useGoogleData = (user: {access_token: string} | null, setRequestMade: any)
                     }else{
                         console.error('Failed to fetch user data: ', response.statusText)
                     }
-                setRequestMade(false)
+                setAuthMade(false)
                 }catch(error){
                     console.log('Error: ', error);
                 }

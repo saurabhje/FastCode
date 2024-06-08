@@ -16,21 +16,22 @@ import {
 
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import {useGoogleLogin } from "@react-oauth/google";
+import { useGoogleLogin } from "@react-oauth/google";
 import useGoogleData from "@/components/features/GoogleAuth";
 
 const url = process.env.NEXT_PUBLIC_URL
 
 export default function Login() {
-  const [user, setUser] = useState<{access_token : string} | null>(null)
+  const [user, setUser] = useState<{ access_token: string } | null>(null)
   const [requestMade, setRequestMade] = useState(false)
+  const [auth, setAuthMade] = useState(false)
   const { toast } = useToast()
   const router = useRouter()
 
   const login = useGoogleLogin({
     onSuccess: (codeResponse: any) => {
       setUser(codeResponse);
-      setRequestMade(true)
+      setAuthMade(true)
     },
     onError: (error?: any) => {
       toast({
@@ -40,7 +41,7 @@ export default function Login() {
       });
     }
   });
-  
+
   useGoogleData(user, setRequestMade)
 
   const onSubmit = async (e: any) => {
@@ -112,11 +113,10 @@ export default function Login() {
               {requestMade ? <BounceLoader /> : "Login"}
             </Button>
             <Button variant="outline" className='w-full' onClick={() => login()}>
-              {}
-              <>
-              <img className="w-5 h-5" src="https://www.svgrepo.com/show/475656/google-color.svg" alt="google logo" loading="lazy" />
-              <span className="ml-2">Login with Google</span>
-              </>
+              {auth ? <BounceLoader /> : <>
+                <img className="w-5 h-5" src="https://www.svgrepo.com/show/475656/google-color.svg" alt="google logo" loading="lazy" />
+                <span className="ml-2">Login with Google</span>
+              </>}
             </Button>
           </div>
           <div className="mt-4 text-center text-sm">

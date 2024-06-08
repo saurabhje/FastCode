@@ -23,6 +23,7 @@ export default function SignUp() {
   const { toast } = useToast()
   const router = useRouter()
   const [requestmade, setRequestMade] = useState(false)
+  const [auth, setAuthMade] = useState(false)
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
@@ -42,7 +43,7 @@ export default function SignUp() {
   const login = useGoogleLogin({
     onSuccess: (codeResponse: any) => {
       setUser(codeResponse);
-      setRequestMade(true)
+      setAuthMade(true)
     },
     onError: (error?: any) => {
       toast({
@@ -55,7 +56,7 @@ export default function SignUp() {
 
 
   // This fetches the user data from the google api and then sends that data in the backend API to store in DB
-  useGoogleData(user, setRequestMade)
+  useGoogleData(user, setAuthMade)
 
   const onSubmit = async (e: any) => {
     e.preventDefault();
@@ -113,7 +114,7 @@ export default function SignUp() {
       </CardHeader>
       <CardContent>
         <Button variant="outline" className='w-full mb-4' onClick={() => login()}>
-          {requestmade ? <BounceLoader />
+          {auth ? <BounceLoader />
             :
             <>
               <img className="w-5 h-5" src="https://www.svgrepo.com/show/475656/google-color.svg" alt="google logo" loading="lazy" />
