@@ -28,11 +28,20 @@ export default function Login() {
   const router = useRouter()
 
   const login = useGoogleLogin({
-    onSuccess: (codeResponse: any) => setUser(codeResponse),
-    onError: (error?: any) => console.log('Login Failed:', error)
+    onSuccess: (codeResponse: any) => {
+      setUser(codeResponse);
+      setRequestMade(true)
+    },
+    onError: (error?: any) => {
+      toast({
+        title: "Login failed",
+        description: `${error}`,
+        duration: 1500
+      });
+    }
   });
   
-  useGoogleData(user)
+  useGoogleData(user, setRequestMade)
 
   const onSubmit = async (e: any) => {
     e.preventDefault();
@@ -103,8 +112,11 @@ export default function Login() {
               {requestMade ? <BounceLoader /> : "Login"}
             </Button>
             <Button variant="outline" className='w-full' onClick={() => login()}>
-              <img className="w-5 h-5" src="https://www.svgrepo.com/show/475656/google-color.svg" alt="google logo" />
+              {}
+              <>
+              <img className="w-5 h-5" src="https://www.svgrepo.com/show/475656/google-color.svg" alt="google logo" loading="lazy" />
               <span className="ml-2">Login with Google</span>
+              </>
             </Button>
           </div>
           <div className="mt-4 text-center text-sm">

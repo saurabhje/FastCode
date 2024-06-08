@@ -29,13 +29,13 @@ const KeyboardLayout = () => {
   const fourthRow = [ ['KeyZ', 'Z'], ['KeyX', 'X'], ['KeyC', 'C'], ['KeyV', 'V'], ['KeyB', 'B'], ['KeyN', 'N'], ['KeyM', 'M'], ['Comma', ','], ['Period', '.'], ['Slash', '/'] ]
 
   return (
-    <div id="keyboard" className="my-20 flex flex-col max-w-[1008px] min-w-[600px] w-full bg-black text-white p-1 rounded overflow-x-hidden">
+    <div id="keyboard" className="my-20 flex flex-col min-w-[600px] w-full bg-black text-white p-1 rounded overflow-x-hidden">
       <div className="flex">
         <div className={`key flex justify-center items-center h-10 min-w-10 flex-grow m-1 ${pressedKey == 'Backquote' ? 'bg-zinc-400' : 'bg-red-800 transition-colors duration-500'}`}>`</div>
         {firstRow.map((key, index) => (
           <div
             key={index}
-            className={`key flex justify-center items-center h-10 w-10 m-1 ${pressedKey == key[0] ? 'bg-zinc-400' : 'bg-neutral-600 transition-colors duration-500'}`}
+            className={`key flex justify-center items-center h-10 min-w-10 m-1 ${pressedKey == key[0] ? 'bg-zinc-400' : 'bg-neutral-600 transition-colors duration-500'}`}
           >
             {key[1]}
           </div>
@@ -47,7 +47,7 @@ const KeyboardLayout = () => {
         {secondRow.map((key, index) => (
           <div
             key={index}
-            className={`key flex justify-center items-center h-10 w-10  m-1 ${pressedKey == key[0] ? 'bg-zinc-400' : 'bg-neutral-600 transition-colors duration-500'}`}
+            className={`key flex justify-center items-center h-10 min-w-10  m-1 ${pressedKey == key[0] ? 'bg-zinc-400' : 'bg-neutral-600 transition-colors duration-500'}`}
           >
             {key[1]}
           </div>
@@ -58,7 +58,7 @@ const KeyboardLayout = () => {
         {thirdRow.map((key, index) => (
           <div
             key={index}
-            className={`key flex justify-center items-center h-10 w-10 m-1 ${pressedKey == key[0] ? 'bg-zinc-400' : 'bg-neutral-600 transition-colors duration-500'}`}
+            className={`key flex justify-center items-center h-10 min-w-10 m-1 ${pressedKey == key[0] ? 'bg-zinc-400' : 'bg-neutral-600 transition-colors duration-500'}`}
           >
             {key[1]}
           </div>
@@ -70,7 +70,7 @@ const KeyboardLayout = () => {
         {fourthRow.map((key, index) => (
           <div
             key={index}
-            className={`key flex justify-center items-center h-10 w-10 m-1 ${pressedKey == key[0] ? 'bg-zinc-400' : 'bg-neutral-600 transition-colors duration-500'}`}
+            className={`key flex justify-center items-center h-10 min-w-10 m-1 ${pressedKey == key[0] ? 'bg-zinc-400' : 'bg-neutral-600 transition-colors duration-500'}`}
           >
             {key[1]}
           </div>
@@ -78,13 +78,13 @@ const KeyboardLayout = () => {
         <div className={`key flex justify-center items-center h-10 flex-grow m-1 ${pressedKey == 'ShiftRight' ? 'bg-zinc-400' : 'bg-neutral-800 transition-colors duration-500'}`}>shift</div>
       </div>
       <div className="flex">
-        <div className={`key flex justify-center items-center h-10 w-10 m-1 ${pressedKey =='ControlLeft' ? 'bg-zinc-400' : 'bg-neutral-800 transition-colors duration-500'}`}>ctrl</div>
-        <div className={`key flex justify-center items-center h-10 w-10 m-1 ${pressedKey == 'AltLeft' ? 'bg-zinc-400' : 'bg-neutral-800 transition-colors duration-500'}`}>alt</div>
-        <div className={`key flex justify-center items-center h-10 w-10 m-1 ${pressedKey == 'MetaLeft' ? 'bg-zinc-400' : 'bg-neutral-800 transition-colors duration-500'}`}>win</div>
+        <div className={`key flex justify-center items-center h-10 min-w-10 m-1 ${pressedKey =='ControlLeft' ? 'bg-zinc-400' : 'bg-neutral-800 transition-colors duration-500'}`}>ctrl</div>
+        <div className={`key flex justify-center items-center h-10 min-w-10 m-1 ${pressedKey == 'AltLeft' ? 'bg-zinc-400' : 'bg-neutral-800 transition-colors duration-500'}`}>alt</div>
+        <div className={`key flex justify-center items-center h-10 min-w-10 m-1 ${pressedKey == 'MetaLeft' ? 'bg-zinc-400' : 'bg-neutral-800 transition-colors duration-500'}`}>win</div>
         <div className={`key flex justify-center items-center h-10 flex-grow  m-1 ${pressedKey == 'Space' ? 'bg-zinc-400' : 'bg-neutral-600 transition-colors duration-500'}`}>Space</div>
-        <div className={`key flex justify-center items-center h-10 w-10 m-1 ${pressedKey =='AltRight' ? 'bg-zinc-400' : 'bg-neutral-800 transition-colors duration-500'}`}>alt</div>
-        <div className={`key flex justify-center items-center h-10 w-10 m-1 ${pressedKey == 'Fn' ? 'bg-zinc-400' : 'bg-neutral-800 transition-colors duration-500'}`}>fn</div>
-        <div className={`key flex justify-center items-center h-10 w-10 m-1 ${pressedKey =='ControlRight' ? 'bg-zinc-400' : 'bg-neutral-800 transition-colors duration-500'}`}>ctrl</div>
+        <div className={`key flex justify-center items-center h-10 min-w-10 m-1 ${pressedKey =='AltRight' ? 'bg-zinc-400' : 'bg-neutral-800 transition-colors duration-500'}`}>alt</div>
+        <div className={`key flex justify-center items-center h-10 min-w-10 m-1 ${pressedKey == 'Fn' ? 'bg-zinc-400' : 'bg-neutral-800 transition-colors duration-500'}`}>fn</div>
+        <div className={`key flex justify-center items-center h-10 min-w-10 m-1 ${pressedKey =='ControlRight' ? 'bg-zinc-400' : 'bg-neutral-800 transition-colors duration-500'}`}>ctrl</div>
       </div>
     </div>
   );

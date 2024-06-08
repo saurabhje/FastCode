@@ -37,7 +37,7 @@ int main() {
     if (${variables[1]} > ${num}) {
         cout << "${variables[1]} is greater than ${num}" << endl;
     } else {
-        cout << "${variables[1]} is not greater than ${num}" << endl;
+        cout << "${variables[1]} is smaller than ${num}" << endl;
     }`;
     }
 

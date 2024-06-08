@@ -4,11 +4,11 @@ export default function TwoDo() {
             <h1 className="text-2xl mb-10">Twodo</h1>
             <ol className="list-decimal pl-5">
                 <li className="line-through">Actually make a route for this twodo.</li>
-                <li>Improve the dashboard, add graphs.</li>
-                <li>Github Auth?</li>
-                <li>Adding polling for your non-existent users where they can poll to add new features.</li>
+                <li className="line-through">Add few things on homepage to lure new people. 🧙‍♀️</li>
+                <li className="line-through">Improve the dashboard, add graphs.</li>
+                <li className="line-through">Google Auth?</li>
                 <li>Improve the syntax generation function.</li>
-                <li>Add few things on homepage to lure new people. 🧙‍♀️</li>
+                <li>Adding polling for your non-existent users where they can poll to add new features.</li>
             </ol>
         </div>
 

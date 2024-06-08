@@ -25095,53 +25095,6 @@ export const preparr = ["aboard", "about", "above", "across", "after", "against"
 "via", "with", "within", "without"]
 
 export const codes = [
-//     `function sum(n1, n2){
-//     const num = 10
-//     const diny = 8
-//     sum = num + din
-//     return sum`,
-//     `def ambigousSubarray(nums):
-
-//     hashmap = {}
-//     count = 0
-//     length = 0
-//     for i, n in enumerate(nums):
-//         if n == 0:
-//             count -= 1
-//         else:
-//             count += 1
-//             if count == 0:
-//                 length = i + 1
-//             else:
-//                 if count not in hashmap:
-//                     hashmap[count] = i
-//                 else:
-//                     length = max(length - hashmap[count])
-//             return length`,
-`#include<iostream>
-using namespace std;
-
-int main(){
-    int num = 10
-    int next = num++;
-    cout << num <<endl << next;
-    return 0;
-}`,
-`#include <bits/stdc++.h>
-using namespace std;
-int main()
-
-{
-    int num = 4635, sum = 0, temp;
-    while (num != 0)
-    {
-        temp = num%10;
-        sum = sum+temp;
-        num = num/10;
-    }
-    cout << "Sum: " << sum << endl;
-    return 0;
-}`,
 `class BrowserHistory:
 
     def __init__(self, hompage: str):
@@ -25176,16 +25129,16 @@ int main()
     console.log(code)
     return code;
 }`,
-// `def findKpath(flights, src, dst, k):
-// prices = [float("inf")] * n
-// prices[src] = 0
-// for i in range(k+1):
-//     tempprice = prices.copy()
-//     for s, p, d in flights:
-//         if prices[s] == float("inf"):
-//             continue
-//         if prices[s] + p < tempprice[d]:
-//             tempprice[d] = prices[s] + p
-//     prices = tempprice
-// return -1 if prices[dst] == float("inf") else prices[dst]`,
+`def findKpath(flights, src, dst, k):
+prices = [float("inf")] * n
+prices[src] = 0
+for i in range(k+1):
+    tempprice = prices.copy()
+    for s, p, d in flights:
+        if prices[s] == float("inf"):
+            continue
+        if prices[s] + p < tempprice[d]:
+            tempprice[d] = prices[s] + p
+    prices = tempprice
+return -1 if prices[dst] == float("inf") else prices[dst]`,
 ]

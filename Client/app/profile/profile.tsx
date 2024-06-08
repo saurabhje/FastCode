@@ -91,7 +91,7 @@ const ProfileData: React.FC<ProfileDataProps> = ({ profileData }) => {
                 <h1 className='text-2xl font-semibold text-start'>{profileData.name} </h1>
                 <h2 className='text-muted-foreground text-start'>{profileData.email} </h2>
             </div>
-            <Tabs defaultValue="today" className='self-start'>
+            <Tabs defaultValue="today" className='flex flex-col items-center'>
                 <TabsList>
                     <TabsTrigger value='today' className='data-[state=active]:bg-primary data-[state=active]:text-background' >Today</TabsTrigger>
                     <TabsTrigger value='allTime' className='data-[state=active]:bg-primary data-[state=active]:text-background'>All time</TabsTrigger>
@@ -99,7 +99,7 @@ const ProfileData: React.FC<ProfileDataProps> = ({ profileData }) => {
                 <TabsContent value="today">
                     <div className='w-full flex flex-col md:flex-row gap-10'>
                         <div className="border-2 border-zinc-600 p-2 rounded-lg">
-                            <h1 className="text-center text-3xl font-bold mb-1">Text</h1>
+                            <h1 className="text-center text-3xl font-bold mb-2">Text</h1>
                             <div className="flex flex-wrap items-center justify-center gap-4">
                                 <StatCard title={'Total tests'} value={`+${profileData.text_tests_today}`} />
                                 <StatCard title={'Highest speed'} value={`${profileData.highest_text_wpm_today}`} />
@@ -109,7 +109,7 @@ const ProfileData: React.FC<ProfileDataProps> = ({ profileData }) => {
                             </div>
                         </div>
                         <div className="border-2 border-zinc-600 p-2 rounded-lg">
-                            <h1 className="text-center text-3xl font-bold mb-1">Code</h1>
+                            <h1 className="text-center text-3xl font-bold mb-2">Code</h1>
                             <div className="flex flex-wrap justify-center items-center gap-4">
                                 <StatCard title={'Total tests'} value={`+${profileData.code_tests_today}`} />
                                 <StatCard title={'Highest speed'} value={`${profileData.highest_code_wpm_today}`} />

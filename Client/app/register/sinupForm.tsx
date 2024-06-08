@@ -37,15 +37,26 @@ export default function SignUp() {
     return true;
   };
 
-  // This fetches the user data from the google api and then sends that data in the backend API to store in DB
-  useGoogleData(user) 
-  // which returns an accessToken cookie
 
+  // which returns an accessToken cookie
   const login = useGoogleLogin({
-    onSuccess: (codeResponse: any) => setUser(codeResponse),
-    onError: (error?: any) => console.log('Login Failed:', error)
+    onSuccess: (codeResponse: any) => {
+      setUser(codeResponse);
+      setRequestMade(true)
+    },
+    onError: (error?: any) => {
+      toast({
+        title: "Login failed",
+        description: `${error}`,
+        duration: 1500
+      });
+    }
   });
-  
+
+
+  // This fetches the user data from the google api and then sends that data in the backend API to store in DB
+  useGoogleData(user, setRequestMade)
+
   const onSubmit = async (e: any) => {
     e.preventDefault();
     const isValid = validatePasswords();
@@ -101,10 +112,14 @@ export default function SignUp() {
         </CardDescription>
       </CardHeader>
       <CardContent>
-      <Button variant="outline" className='w-full mb-4' onClick={()=> login()}>
-              <img className="w-5 h-5" src="https://www.svgrepo.com/show/475656/google-color.svg" alt="google logo" />
+        <Button variant="outline" className='w-full mb-4' onClick={() => login()}>
+          {requestmade ? <BounceLoader />
+            :
+            <>
+              <img className="w-5 h-5" src="https://www.svgrepo.com/show/475656/google-color.svg" alt="google logo" loading="lazy" />
               <span className="ml-2">Sign up with Google</span>
-      </Button>
+            </>}
+        </Button>
         <form onSubmit={onSubmit}>
           <div className="grid gap-4">
             <div className="grid grid-cols-2 gap-4">
