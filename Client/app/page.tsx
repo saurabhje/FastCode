@@ -19,7 +19,7 @@ export default async function home() {
         <a className='hover:text-primary hover:underline' href='https://saurabhje.vercel.app'>Blog</a>
         <a className='hover:text-primary hover:underline' href='https://x.com/ghostedglory'>Twitter</a>
         <a className='hover:text-primary hover:underline' href='https://github.com/saurabhje/fastcode'>Github repo</a>
-      </footer>
+{/*       </footer> */}
     </div>
   )
 }
