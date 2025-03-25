@@ -114,7 +114,7 @@ export default function Login() {
             </Button>
             <Button variant="outline" className='w-full' onClick={() => login()}>
               {auth ? <BounceLoader /> : <>
-                <img className="w-5 h-5" src="https://www.svgrepo.com/show/475656/google-color.svg" alt="google logo" loading="lazy" />
+                <img className="w-5 h-5" src="/google.svg" alt="google logo"/>
                 <span className="ml-2">Login with Google</span>
               </>}
             </Button>

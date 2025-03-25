@@ -49,33 +49,7 @@ mail = Mail(app)
 def index():
     try:
         cur = mysql.connection.cursor()
-        result = cur.execute('''CREATE TABLE IF NOT EXISTS `users`(
-    `id` INT(4) NOT NULL AUTO_INCREMENT,
-    `name` VARCHAR(50) NOT NULL,
-    `email` VARCHAR(50) NOT NULL,
-    `password` VARCHAR(50) NOT NULL,
-    `text_total_tests` INT DEFAULT 0,
-    `text_tests_today` INT DEFAULT 0,
-    `code_total_tests` INT DEFAULT 0,
-    `code_tests_today` INT DEFAULT 0,
-    `total_code_accuracy_today` FLOAT DEFAULT 0,
-    `total_text_accuracy_today` FLOAT DEFAULT 0,
-    `total_code_accuracy` FLOAT DEFAULT 0,
-    `total_text_accuracy` FLOAT DEFAULT 0,
-    `total_code_wpm` FLOAT DEFAULT 0,
-    `total_text_wpm` FLOAT DEFAULT 0,
-    `total_code_wpm_today` FLOAT DEFAULT 0,
-    `total_text_wpm_today` FLOAT DEFAULT 0,
-    `highest_text_wpm_ever` FLOAT DEFAULT 0,
-    `highest_text_wpm_today` FLOAT DEFAULT 0,
-    `highest_text_accuracy_today` FLOAT DEFAULT 0,
-    `highest_code_wpm_ever` FLOAT DEFAULT 0,
-    `highest_code_wpm_today` FLOAT DEFAULT 0,
-    `highest_code_accuracy_ever`FLOAT DEFAULT 0,
-    `highest_code_accuracy_today` FLOAT DEFAULT 0,
-    PRIMARY KEY (`id`),
-    UNIQUE (`email`)
-);''')
+        result = cur.execute('''SHOW TABLES''')
         cur.close()
         if result:
             return {'message': result}, 200

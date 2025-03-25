@@ -117,8 +117,8 @@ export default function SignUp() {
           {auth ? <BounceLoader />
             :
             <>
-              <img className="w-5 h-5" src="https://www.svgrepo.com/show/475656/google-color.svg" alt="google logo" loading="lazy" />
-              <span className="ml-2">Sign up with Google</span>
+                <img className="w-5 h-5" src="/google.svg" alt="google logo"/>
+                <span className="ml-2">Sign up with Google</span>
             </>}
         </Button>
         <form onSubmit={onSubmit}>
