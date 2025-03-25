@@ -27,7 +27,7 @@ app.config['MYSQL_USER'] = os.environ.get('MYSQL_USER')
 app.config['MYSQL_PASSWORD'] = os.environ.get('MYSQL_PASSWORD')
 app.config['MYSQL_HOST'] = os.environ.get('MYSQL_HOST')
 app.config['MYSQL_DB'] = os.environ.get('MYSQL_DB')
-app.config['MYSQL_PORT'] = 19228
+app.config['MYSQL_PORT'] = 22186
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 app.config["JWT_SECRET_KEY"] = os.environ.get('JWT_SECRET_KEY')
 app.config['MYSQL_SSL_CA'] = '/path/to/your/ca/certificate.pem'
@@ -49,7 +49,7 @@ mail = Mail(app)
 def index():
     try:
         cur = mysql.connection.cursor()
-        result = cur.execute('''SHOW TABLES''')
+        result = cur.execute('SHOW TABLES')
         cur.close()
         if result:
             return {'message': result}, 200
@@ -228,3 +228,5 @@ def reset_statistics():
 
 
     
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=10000, debug=False)
