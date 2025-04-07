@@ -5,7 +5,7 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'KeyScripter | Homepage',
-  description: 'homepage or landing page with a hero section of the typing application'
+  description: 'snippet typing application'
 }
 
 export default async function home() {

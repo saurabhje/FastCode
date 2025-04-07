@@ -1,0 +1,47 @@
+export const cpp = [
+    `#include <iostream>\n\ntemplate <typename... Args>\nauto sum(Args... args) {\n    return (args + ...);\n}\n\nint main() {\n    std::cout << sum(1, 2.5, 3, 4.2f) << std::endl;\n}`,
+    `#include <iostream>\n\nclass FileGuard {\n    FILE* file;\npublic:\n    FileGuard(const char* fname) : file(fopen(fname, "r")) {}\n    ~FileGuard() { if (file) fclose(file); }\n    operator FILE*() { return file; }\n};\n\nint main() {\n    FileGuard fg("test.txt");\n    if (fg) std::cout << "File opened!" << std::endl;\n}`,
+    `#include <memory>\n#include <iostream>\n\ntemplate <typename T>\nvoid print_ptr(const std::unique_ptr<T>& ptr) {\n    std::cout << *ptr << std::endl;\n}\n\nint main() {\n    auto num = std::make_unique<int>(42);\n    print_ptr(num);\n}`,
+    `#include <iostream>\n#include <vector>\n#include <numeric>\n\nint main() {\n    std::vector<int> v = {1, 2, 3, 4, 5};\n    int sum = 0;\n    auto accumulate = [&sum](int x) { sum += x; };\n    for_each(v.begin(), v.end(), accumulate);\n    std::cout << "Sum: " << sum << std::endl;\n}`,
+    `#include <utility>\n#include <memory>\n\ntemplate<typename T, typename... Args>\nstd::unique_ptr<T> make_unique(Args&&... args) {\n    return std::unique_ptr<T>(new T(std::forward<Args>(args)...));\n}\n\nstruct Widget { Widget(int, double) {} };\nint main() {\n    auto ptr = make_unique<Widget>(42, 3.14);\n}`
+]
+export const python = [
+    `numbers = [1, 2, 3, 4, 5]\nthreshold = 3\nfiltered = [x for x in numbers if (lambda y: y > threshold)(x)]\nprint(filtered)`,
+    `from contextlib import contextmanager\n\n@contextmanager\ndef file_guard(path):\n    f = open(path, 'r')\n    try:\n        yield f\n    finally:\n        f.close()\n\nwith file_guard('test.txt') as f:\n    print(f.read())`,
+    `import threading\n\nlock = threading.Lock()\ndef safe_print(msg):\n    with lock:\n        print(msg)\n\nthreads = [threading.Thread(target=safe_print, args=(f"Thread {i}",)) for i in range(3)]\nfor t in threads: t.start()\nfor t in threads: t.join()`,
+    `from typing import Any\n\ndef sum_values(*args: Any) -> float:\n    return sum(float(x) for x in args)\n\nprint(sum_values(1, 2.5, '3', 4.2))`,
+    `class Resource:\n    def __init__(self, name):\n        self.name = name\n    def __enter__(self):\n        print(f"Acquired {self.name}")\n        return self\n    def __exit__(self, *args):\n        print(f"Released {self.name}")\n\nwith Resource("DB") as r:\n    print(f"Using {r.name}")`,
+    `class Meta(type):\n    def __new__(cls, name, bases, dct):\n        dct['registry'] = []\n        return super().__new__(cls, name, bases, dct)\n\nclass Base(metaclass=Meta): pass\nclass A(Base): pass\nprint(A.registry)`
+]
+export const go = [
+    `package main\n\nimport "fmt"\n\nfunc main() {\n\tnums := []int{1, 2, 3, 4, 5}\n\tthreshold := 3\n\tfiltered := nums[:0]\n\tfor _, x := range nums {\n\t\tif x > threshold {\n\t\t\tfiltered = append(filtered, x)\n\t\t}\n\t}\n\tfmt.Println(filtered)\n}`,
+    `package main\n\nimport (\n\t"os"\n\t"log"\n)\n\nfunc main() {\n\tf, err := os.Open("test.txt")\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer f.Close()\n\tbuf := make([]byte, 1024)\n\t_, err = f.Read(buf)\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n}`,
+    `package main\n\nimport (\n\t"fmt"\n\t"sync"\n)\n\nfunc main() {\n\tvar wg sync.WaitGroup\n\tvar mu sync.Mutex\n\tfor i := 0; i < 3; i++ {\n\t\twg.Add(1)\n\t\tgo func(id int) {\n\t\t\tmu.Lock()\n\t\t\tfmt.Printf("Thread %d\\n", id)\n\t\t\tmu.Unlock()\n\t\t\twg.Done()\n\t\t}(i)\n\t}\n\twg.Wait()\n}`,
+    `package main\n\nimport "fmt"\n\nfunc sumValues(vals ...interface{}) float64 {\n\tsum := 0.0\n\tfor _, v := range vals {\n\t\tswitch x := v.(type) {\n\t\tcase int:\n\t\t\tsum += float64(x)\n\t\tcase float64:\n\t\t\tsum += x\n\t\t}\n\t}\n\treturn sum\n}\n\nfunc main() {\n\tfmt.Println(sumValues(1, 2.5, 3, 4.2))\n}`,
+    `package main\n\nimport "fmt"\n\ntype Resource struct {\n\tname string\n}\n\nfunc (r *Resource) Close() {\n\tfmt.Printf("Released %s\\n", r.name)\n}\n\nfunc NewResource(name string) *Resource {\n\tr := &Resource{name: name}\n\tfmt.Printf("Acquired %s\\n", r.name)\n\treturn r\n}\n\nfunc main() {\n\tr := NewResource("DB")\n\tdefer r.Close()\n\tfmt.Printf("Using %s\\n", r.name)\n}`,
+    `package main\n\nimport "fmt"\n\ntype Registry interface {\n\tRegister()\n}\n\ntype Base struct{}\n\nfunc (b Base) Register() {\n\tfmt.Println("Registered")\n}\n\nfunc main() {\n\tvar r Registry = Base{}\n\tr.Register()\n}`
+]
+export const js = [
+    `const numbers = [1, 2, 3, 4, 5];\nconst threshold = 3;\nconst filtered = numbers.filter(x => x > threshold);\nconsole.log(filtered);`,
+    `const fs = require('fs');\n\ntry {\n  const data = fs.readFileSync('test.txt', 'utf8');\n  console.log(data);\n} catch (err) {\n  console.error(err);\n}`,
+    `const lock = new Mutex();\nasync function safePrint(msg) {\n  await lock.acquire();\n  try {\n    console.log(msg);\n  } finally {\n    lock.release();\n  }\n}\n\nPromise.all([1,2,3].map(i => safePrint(\`Thread \${i}\`)));`,
+    `function sumValues(...args) {\n  return args.reduce((sum, x) => sum + Number(x), 0);\n}\n\nconsole.log(sumValues(1, '2.5', 3, 4.2));`,
+    `class Resource {\n  constructor(name) {\n    this.name = name;\n    console.log(\`Acquired \${name}\`);\n  }\n  \n  close() {\n    console.log(\`Released \${this.name}\`);\n  }\n}\n\nconst r = new Resource('DB');\ntry {\n  console.log(\`Using \${r.name}\`);\n} finally {\n  r.close();\n}`,
+    `class Registry {\n  static items = [];\n  static register(item) {\n    this.items.push(item);\n  }\n}\n\nRegistry.register('test');\nconsole.log(Registry.items);`
+]
+export const rust = [
+    `fn main() {\n    let numbers = vec![1, 2, 3, 4, 5];\n    let threshold = 3;\n    let filtered: Vec<_> = numbers.iter().filter(|&x| x > &threshold).collect();\n    println!("{:?}", filtered);\n}`,
+    `use std::fs::File;\nuse std::io::Read;\n\nfn main() -> std::io::Result<()> {\n    let mut f = File::open("test.txt")?;\n    let mut buf = String::new();\n    f.read_to_string(&mut buf)?;\n    println!("{}", buf);\n    Ok(())\n}`,
+    `use std::sync::{Arc, Mutex};\nuse std::thread;\n\nfn main() {\n    let lock = Arc::new(Mutex::new(()));\n    let handles: Vec<_> = (0..3).map(|i| {\n        let lock = lock.clone();\n        thread::spawn(move || {\n            let _guard = lock.lock().unwrap();\n            println!("Thread {}", i);\n        })\n    }).collect();\n    \n    for h in handles {\n        h.join().unwrap();\n    }\n}`,
+    `fn sum_values<T: Into<f64> + Copy>(args: &[T]) -> f64 {\n    args.iter().map(|&x| x.into()).sum()\n}\n\nfn main() {\n    println!("{}", sum_values(&[1, 2.5, 3, 4.2]));\n}`,
+    `struct Resource {\n    name: String,\n}\n\nimpl Resource {\n    fn new(name: &str) -> Self {\n        println!("Acquired {}", name);\n        Resource { name: name.to_string() }\n    }\n}\n\nimpl Drop for Resource {\n    fn drop(&mut self) {\n        println!("Released {}", self.name);\n    }\n}\n\nfn main() {\n    let r = Resource::new("DB");\n    println!("Using {}", r.name);\n}`,
+    `trait Registry {\n    fn register(&self);\n}\n\nstruct Base;\n\nimpl Registry for Base {\n    fn register(&self) {\n        println!("Registered");\n    }\n}\n\nfn main() {\n    let r = Base;\n    r.register();\n}`
+]
+export const java = [
+    `List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);\nint threshold = 3;\nList<Integer> filtered = numbers.stream()\n    .filter(x -> x > threshold)\n    .collect(Collectors.toList());\nSystem.out.println(filtered);`,
+    `try (BufferedReader br = new BufferedReader(new FileReader("test.txt"))) {\n    String line;\n    while ((line = br.readLine()) != null) {\n        System.out.println(line);\n    }\n} catch (IOException e) {\n    e.printStackTrace();\n}`,
+    `Lock lock = new ReentrantLock();\nExecutorService executor = Executors.newFixedThreadPool(3);\nfor (int i = 0; i < 3; i++) {\n    final int id = i;\n    executor.submit(() -> {\n        lock.lock();\n        try {\n            System.out.println("Thread " + id);\n        } finally {\n            lock.unlock();\n        }\n    });\n}\nexecutor.shutdown();`,
+    `public static double sumValues(Number... args) {\n    return Arrays.stream(args)\n        .mapToDouble(Number::doubleValue)\n        .sum();\n}\n\npublic static void main(String[] args) {\n    System.out.println(sumValues(1, 2.5f, 3, 4.2d));\n}`,
+    `class Resource implements AutoCloseable {\n    private String name;\n    \n    public Resource(String name) {\n        this.name = name;\n        System.out.println("Acquired " + name);\n    }\n    \n    public void use() {\n        System.out.println("Using " + name);\n    }\n    \n    @Override\n    public void close() {\n        System.out.println("Released " + name);\n    }\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        try (Resource r = new Resource("DB")) {\n            r.use();\n        }\n    }\n}`,
+    `interface Registry {\n    void register();\n}\n\nclass Base implements Registry {\n    @Override\n    public void register() {\n        System.out.println("Registered");\n    }\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        Registry r = new Base();\n        r.register();\n    }\n}`
+]

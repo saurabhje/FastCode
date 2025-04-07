@@ -77,7 +77,7 @@ export default function RandPhrase(prop: randPhraseprop) {
     const getClassForIndex = (index: number) => {
         let cn = '';
         if (index === typedChars.length) {
-            cn = 'blinker '; // Apply the blinker class to the current character being typed
+            cn = 'blinker ';
         }
         if (typedChars[index] && !typedErr.includes(index)) {
             return cn + 'text-zinc-500';

@@ -1,4 +1,3 @@
-import Navbar from "@/components/navbar"
 import { TabsDemo } from "./tabs"
 export default function LoginPage() {
     return (
