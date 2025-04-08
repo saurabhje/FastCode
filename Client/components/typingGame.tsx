@@ -4,15 +4,6 @@ import RandPhrase from "@/components/randPhrase";
 import CodeComponent from "@/components/randCode";
 import { Switch } from "@/components/ui/switch";
 import { Checkbox } from "@/components/ui/checkbox";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
 
 type TypingGameProps = {
   present: boolean;
@@ -31,9 +22,6 @@ export default function TypingGame(props: TypingGameProps) {
     }
   }, []);
 
-  useEffect(() => {
-
-  }, [])
   function handleMode() {
     mode === 'code' ? setMode('text') : setMode('code');
   }
@@ -65,22 +53,20 @@ export default function TypingGame(props: TypingGameProps) {
         </div>
         {
           mode == 'code' ?
-            <Select onValueChange={(val) => setLanguage(val)} >
-              <SelectTrigger className="w-[180px]" >
-                <SelectValue placeholder="Select a language" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectLabel>Languages</SelectLabel>
-                  <SelectItem value="cpp">C++</SelectItem>
-                  <SelectItem value="python">Python</SelectItem>
-                  <SelectItem value="java">Java</SelectItem>
-                  <SelectItem value="js">Javascript</SelectItem>
-                  <SelectItem value="rust">Rust</SelectItem>
-                  <SelectItem value="go">Go</SelectItem>
-                </SelectGroup>
-              </SelectContent>
-            </Select>
+            <select
+              id="langs"
+              value={language}
+              onChange={(e) => setLanguage(e.target.value)}
+              className="w-[180px] text-sm rounded-sm border border-1 border-neutral-500 p-2"
+            >
+              <option value="">Languages</option>
+              <option value="cpp">C++</option>
+              <option value="python">Python</option>
+              <option value="java">Java</option>
+              <option value="js">Javascript</option>
+              <option value="rust">Rust</option>
+              <option value="go">Go</option>
+            </select>
             : null
         }
         <div className="flex items-center gap-1.5 ">
