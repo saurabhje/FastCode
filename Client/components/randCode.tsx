@@ -56,6 +56,7 @@ export default function CodeComponent(prop: codeComponentprop) {
                     const { wpm, accuracy } = calculateWPM(startTime!, randCode, Array.from(errors));
                     setWpm(wpm)
                     setAccuracy(accuracy)
+                    if (ranked) SendtestData(wpm, accuracy, 'code')
                     handleRestart()
                     return;
                 }

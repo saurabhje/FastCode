@@ -36,7 +36,7 @@ export default function Login() {
     onError: (error?: any) => {
       toast({
         title: "Login failed",
-        description: `${error}`,
+        description: `No Account Information was captured`,
         duration: 1500
       });
     }

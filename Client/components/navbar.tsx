@@ -15,7 +15,6 @@ export default async function NavBar() {
             </div>
             <div className="flex items-center gap-3 md:gap-7">
                 <ModeToggle />
-                <Link href="/twodo" className="text-md md:text-lg no-underline  hover:text-gray-500">Twodo</Link>
                 {bool ? <Logout /> : <Link href="/login" className="text-md md:text-lg no-underline  hover:text-gray-600">Login</Link>}
             </div>
         </nav>
