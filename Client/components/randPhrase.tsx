@@ -111,7 +111,7 @@ export default function RandPhrase(prop: randPhraseprop) {
                 }}
             />
             <Stats accuracy={accuracy} wpm={wpm} />
-            <div className='flex justify-center items-center w-full'>
+            <div className='flex justify-center items-center max-w-[1280px] w-full'>
                 {!isMobile && <KeyboardLayout />}
             </div>
         </div>
